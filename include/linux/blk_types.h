@@ -31,6 +31,7 @@ struct bio_vec {
 /*
  * main unit of I/O for the block layer and lower layers (ie drivers and
  * stacking drivers)
+ * bio struct - kwonje
  */
 struct bio {
 	sector_t		bi_sector;	/* device address in 512 byte
