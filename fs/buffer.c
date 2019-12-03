@@ -3008,6 +3008,7 @@ static void guard_bh_eod(int rw, struct bio *bio, struct buffer_head *bh)
 
 /*  
 	호영: [ 수정부분 ] submit_bh 내장 함수, buffer_head 확인  -> bio 할당 부분
+	이거 호출하는 fs component 코드를 찾아야함
 */
 
 int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
