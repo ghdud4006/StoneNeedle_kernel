@@ -11,11 +11,18 @@ Adding Ctags & Cscope
 
 
 ## 일단 int 형으로 buffer_head 랑 bio 에 fs_component_type 라는 필드 파놓음 
->0 : superblock 
->1 : group descriptor
->2 : block bitmap
->3 : inode bitmap
->4 : inode
->5 : data block
->6 : journal
+
+0 : superblock 
+
+1 : group descriptor
+
+2 : block bitmap
+
+3 : inode bitmap
+
+4 : inode
+
+5 : data block
+
+6 : journal
 
