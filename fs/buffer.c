@@ -3007,8 +3007,13 @@ static void guard_bh_eod(int rw, struct bio *bio, struct buffer_head *bh)
 }
 
 /*  
-	호영: [ 수정부분 ] submit_bh 내장 함수, buffer_head 확인  -> bio 할당 부분
-	이거 호출하는 fs component 코드를 찾아야함
+	(for StoneNeedle ..)
+	we need to modify submit_bh.
+	because this function allocates bio struct. and this function is start point to block layer.
+	
+	<submit_bh()>
+	1. allocate bio struct based buffer_head.
+	2. call submit_bio() 
 */
 
 int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
