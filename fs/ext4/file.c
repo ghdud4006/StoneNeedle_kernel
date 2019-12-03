@@ -590,6 +590,7 @@ loff_t ext4_llseek(struct file *file, loff_t offset, int whence)
 	return -EINVAL;
 }
 
+/*file operations - kwonje*/
 const struct file_operations ext4_file_operations = {
 	.llseek		= ext4_llseek,
 	.read		= do_sync_read,
@@ -609,6 +610,7 @@ const struct file_operations ext4_file_operations = {
 	.fallocate	= ext4_fallocate,
 };
 
+/*inode operations - kwonje*/
 const struct inode_operations ext4_file_inode_operations = {
 	.setattr	= ext4_setattr,
 	.getattr	= ext4_getattr,
