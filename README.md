@@ -22,7 +22,10 @@ Adding Ctags & Cscope
 
 4 : inode
 
-5 : data block
+5 : regular file data block
 
-6 : journal
+6 : directory data block
 
+7 : journal
+
+++ 계획? file name or type (확장자)
