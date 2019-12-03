@@ -75,6 +75,8 @@ struct buffer_head {
 	struct address_space *b_assoc_map;	/* mapping this buffer is
 						   associated with */
 	atomic_t b_count;		/* users using this buffer_head */
+	
+	int fs_component_type; 		/* for StoneNeeedle(file system's component type) */
 };
 
 /*

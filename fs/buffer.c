@@ -3006,6 +3006,16 @@ static void guard_bh_eod(int rw, struct bio *bio, struct buffer_head *bh)
 	}
 }
 
+/*  
+	(for StoneNeedle ..)
+	we need to modify submit_bh.
+	because this function allocates bio struct. and this function is start point to block layer.
+	
+	<submit_bh()>
+	1. allocate bio struct based buffer_head.
+	2. call submit_bio() 
+*/
+
 int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 {
 	struct bio *bio;
