@@ -1014,6 +1014,7 @@ out:
  * because we're write()ing a buffer which is also part of a shared mapping.
  */
 
+/*jbd2_journal_get_write_access -daeyeon*/
 int jbd2_journal_get_write_access(handle_t *handle, struct buffer_head *bh)
 {
 	struct journal_head *jh = jbd2_journal_add_journal_head(bh);
@@ -1047,6 +1048,8 @@ int jbd2_journal_get_write_access(handle_t *handle, struct buffer_head *bh)
  *
  * Call this if you create a new bh.
  */
+
+/*jbd2_journal_get_create_access -daeyeon*/
 int jbd2_journal_get_create_access(handle_t *handle, struct buffer_head *bh)
 {
 	transaction_t *transaction = handle->h_transaction;
