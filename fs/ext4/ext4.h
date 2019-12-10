@@ -281,6 +281,7 @@ struct ext4_io_submit {
 
 /*
  * Structure of a blocks group descriptor
+ * Structure of a ext4 blocks group descriptor - daeyeon
  */
 struct ext4_group_desc
 {
