@@ -1171,6 +1171,7 @@ struct ext4_super_block {
 
 /*
  * fourth extended-fs super-block data in memory
+ * ext4 super-block data in memory - daeyeon
  */
 struct ext4_sb_info {
 	unsigned long s_desc_size;	/* Size of a group descriptor in bytes */
