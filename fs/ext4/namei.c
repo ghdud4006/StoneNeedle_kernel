@@ -3208,6 +3208,7 @@ end_rename:
 /*
  * directories can handle most operations...
  */
+//sungwoo dir_inode_operations
 const struct inode_operations ext4_dir_inode_operations = {
 	.create		= ext4_create,
 	.lookup		= ext4_lookup,
