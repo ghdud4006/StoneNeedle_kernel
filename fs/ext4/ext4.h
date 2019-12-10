@@ -1043,6 +1043,7 @@ extern void ext4_set_bits(void *bm, int cur, int len);
 
 /*
  * Structure of the super block
+ * Structure of the ext4 super block - daeyeon
  */
 struct ext4_super_block {
 /*00*/	__le32	s_inodes_count;		/* Inodes count */
