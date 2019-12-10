@@ -635,6 +635,7 @@ enum {
 
 /*
  * Structure of an inode on the disk
+ * Structure of an ext4 inode on the disk - daeyeon
  */
 struct ext4_inode {
 	__le16	i_mode;		/* File mode */
