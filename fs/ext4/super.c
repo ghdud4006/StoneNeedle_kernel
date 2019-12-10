@@ -4475,6 +4475,7 @@ static int ext4_load_journal(struct super_block *sb,
 	return 0;
 }
 
+//sungwoo ext4_commit_super path
 static int ext4_commit_super(struct super_block *sb, int sync)
 {
 	struct ext4_super_block *es = EXT4_SB(sb)->s_es;
