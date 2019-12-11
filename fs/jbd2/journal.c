@@ -2430,6 +2430,7 @@ repeat:
 		new_jh = NULL;		/* We consumed it */
 		set_buffer_jbd(bh);
 		bh->b_private = jh;
+		// journal_head->b_bh = inode_bitmap_bh; - daeyeon
 		jh->b_bh = bh;
 		get_bh(bh);
 		BUFFER_TRACE(bh, "added journal_head");
