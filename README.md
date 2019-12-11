@@ -12,17 +12,17 @@ Adding Ctags & Cscope
 
 ## 일단 int 형으로 buffer_head->fs_component_type, bio->fs_component_type 라는 필드 파놓음 
 
-0 : superblock 
-1 : group descriptor
-2 : block bitmap
-3 : inode bitmap
-4 : regular file inode
-5 : directory inode
-6 : regular file data block
-7 : directory data block
-8 : journal data
+0 : superblock  
+1 : group descriptor  
+2 : block bitmap  
+3 : inode bitmap  
+4 : regular file inode  
+5 : directory inode  
+6 : regular file data block  
+7 : directory data block  
+8 : journal data  
 
-아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고
+아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
 
 ```c
   /* superblock */
