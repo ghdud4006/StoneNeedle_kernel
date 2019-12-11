@@ -185,7 +185,7 @@ enum rq_flag_bits {
 	__REQ_NR_BITS,		/* stops here */
 };
 
-/*Request type - kwonje*/
+/*Request type sent to submit_bh- kwonje*/
 #define REQ_WRITE		(1ULL << __REQ_WRITE)
 #define REQ_FAILFAST_DEV	(1ULL << __REQ_FAILFAST_DEV)
 #define REQ_FAILFAST_TRANSPORT	(1ULL << __REQ_FAILFAST_TRANSPORT)
