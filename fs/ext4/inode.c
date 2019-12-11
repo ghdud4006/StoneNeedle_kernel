@@ -961,7 +961,7 @@ retry_grab:
 retry_journal:
 	handle = ext4_journal_start(inode, EXT4_HT_WRITE_PAGE, needed_blocks);
 	if (IS_ERR(handle)) {
-		page_cache_release(pag2e);
+		page_cache_release(page);
 		return PTR_ERR(handle);
 	}
 
