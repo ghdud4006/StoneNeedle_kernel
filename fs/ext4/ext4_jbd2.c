@@ -243,6 +243,7 @@ int __ext4_journal_get_create_access(const char *where, unsigned int line,
 	return err;
 }
 
+// handle_dirty_metadata - daeyeon 
 int __ext4_handle_dirty_metadata(const char *where, unsigned int line,
 				 handle_t *handle, struct inode *inode,
 				 struct buffer_head *bh)
