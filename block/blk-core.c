@@ -1879,8 +1879,9 @@ void submit_bio(int rw, struct bio *bio)
 				count);
 		}
 	}
-	
-	bio.fs_component_type = 0;	
+
+	/* Hoyoung test code  */	
+	bio->fs_component_type = 0;	
 
 	generic_make_request(bio);
 }
