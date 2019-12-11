@@ -2387,6 +2387,8 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 	}
 
 	inode->i_size = 0;
+
+	//sungwoo return buffer head ext4_append
 	dir_block = ext4_append(handle, inode, &block);
 	if (IS_ERR(dir_block))
 		return PTR_ERR(dir_block);
