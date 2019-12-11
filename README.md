@@ -26,43 +26,42 @@ Adding Ctags & Cscope
 
 ```c
   /* superblock */
-  if (bio->fs_component_type == 0)
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+  	if (bio->fs_component_type == 0)
+		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
 			    io_data->bucket_size);
 	/* group descriptor */
 	else if (bio->fs_component_type == 1) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_grdesc_per_chunk, bio,
 			    io_data->bucket_size);	
 	/* block bitmap */
 	else if (bio->fs_component_type == 2) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_bbmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* inode bitmap */
 	else if (bio->fs_component_type == 3) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_ibmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file inode */
 	else if (bio->fs_component_type == 4) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_rinode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory inode */
 	else if (bio->fs_component_type == 5) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_dinode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file data block */
 	else if (bio->fs_component_type == 6) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_rblock_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory data block */
 	else if (bio->fs_component_type == 7) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_dblock_per_chunk, bio,
 			    io_data->bucket_size);
 	/* journal data */
 	else if (bio->fs_component_type == 8) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
+		calc_bucket_account(io_data->write_ext4_journal_per_chunk, bio,
 			    io_data->bucket_size);
 	/* undefined */
 	else  
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
+		return 0;
 ```
