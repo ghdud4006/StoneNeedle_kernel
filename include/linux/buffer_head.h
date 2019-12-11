@@ -273,6 +273,7 @@ static inline void attach_page_buffers(struct page *page,
 	set_page_private(page, (unsigned long)head);
 }
 
+/*get_bh is getting bf and increaste count-kwonje*/
 static inline void get_bh(struct buffer_head *bh)
 {
         atomic_inc(&bh->b_count);

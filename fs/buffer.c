@@ -1417,6 +1417,8 @@ EXPORT_SYMBOL(__breadahead);
  *  Reads a specified block, and returns buffer head that contains it.
  *  It returns NULL if the block was unreadable.
  */
+/*reading block and return buffer head - kwonje*/
+
 struct buffer_head *
 __bread(struct block_device *bdev, sector_t block, unsigned size)
 {
