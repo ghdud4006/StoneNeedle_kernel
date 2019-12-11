@@ -2362,6 +2362,7 @@ struct ext4_dir_entry_2 *ext4_init_dot_dotdot(struct inode *inode,
 	return ext4_next_entry(de, blocksize);
 }
 
+//sungwoo ext4_init_new_dir function
 static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 			     struct inode *inode)
 {
@@ -2435,6 +2436,8 @@ retry:
 
 	inode->i_op = &ext4_dir_inode_operations;
 	inode->i_fop = &ext4_dir_operations;
+	
+	//sungwoo path of ext4_init_new_dir 
 	err = ext4_init_new_dir(handle, dir, inode);
 	if (err)
 		goto out_clear_inode;
