@@ -1902,7 +1902,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 	BUG_ON(from > PAGE_CACHE_SIZE);
 	BUG_ON(to > PAGE_CACHE_SIZE);
 	BUG_ON(from > to);
-
+	/*Writing data on block and create page buffers for it - kwonje*/
 	head = create_page_buffers(page, inode, 0);
 	blocksize = head->b_size;
 	bbits = block_size_bits(blocksize);
