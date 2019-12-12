@@ -2391,6 +2391,9 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 
 	//sungwoo return buffer head ext4_append
 	dir_block = ext4_append(handle, inode, &block);
+	
+	//dir_block->ext4_type_for_stoneneedle=5;
+
 	if (IS_ERR(dir_block))
 		return PTR_ERR(dir_block);
 	BUFFER_TRACE(dir_block, "get_write_access");
@@ -3015,6 +3018,7 @@ static struct buffer_head *ext4_get_first_dir_block(handle_t *handle,
  * while new_{dentry,inode) refers to the destination dentry/inode
  * This comes from rename(const char *oldpath, const char *newpath)
  */
+//sungwoo directory inode ext4_rename
 static int ext4_rename(struct inode *old_dir, struct dentry *old_dentry,
 		       struct inode *new_dir, struct dentry *new_dentry)
 {
