@@ -14,7 +14,6 @@ Adding Ctags & Cscope
 
 0 : superblock  
 1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1)
-
 2 : block bitmap  
 3 : inode bitmap  
 4 : regular file inode  
