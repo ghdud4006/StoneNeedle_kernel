@@ -10,7 +10,7 @@ Adding Ctags & Cscope
 
 
 
-## unsigned int 형으로 buffer_head->fs_component_type랑 bio->fs_component_type 라는 필드 파놓음  
+## unsigned int 형으로 buffer_head->ext4_type_for_stoneneedle 랑 bio->ext4_type_for_stoneneedle 라는 필드 파놓음  
 
 0 : superblock  
 1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1).  
@@ -27,39 +27,39 @@ Adding Ctags & Cscope
 
 ```c
   /* superblock */
-  	if (bio->unsigned int == 0)
+  	if (bio->ext4_type_for_stoneneedle == 0)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
 			    io_data->bucket_size);
 	/* group descriptor */
-	else if (bio->unsigned int == 1) 
+	else if (bio->ext4_type_for_stoneneedle == 1) 
 		calc_bucket_account(io_data->write_ext4_grdesc_per_chunk, bio,
 			    io_data->bucket_size);	
 	/* block bitmap */
-	else if (bio->unsigned int == 2) 
+	else if (bio->ext4_type_for_stoneneedle == 2) 
 		calc_bucket_account(io_data->write_ext4_bbmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* inode bitmap */
-	else if (bio->unsigned int == 3) 
+	else if (bio->ext4_type_for_stoneneedle == 3) 
 		calc_bucket_account(io_data->write_ext4_ibmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file inode */
-	else if (bio->unsigned int == 4) 
+	else if (bio->ext4_type_for_stoneneedle == 4) 
 		calc_bucket_account(io_data->write_ext4_rinode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory inode */
-	else if (bio->unsigned int == 5) 
+	else if (bio->ext4_type_for_stoneneedle == 5) 
 		calc_bucket_account(io_data->write_ext4_dinode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file data block */
-	else if (bio->unsigned int == 6) 
+	else if (bio->ext4_type_for_stoneneedle == 6) 
 		calc_bucket_account(io_data->write_ext4_rblock_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory data block */
-	else if (bio->unsigned int == 7) 
+	else if (bio->ext4_type_for_stoneneedle == 7) 
 		calc_bucket_account(io_data->write_ext4_dblock_per_chunk, bio,
 			    io_data->bucket_size);
 	/* journal data */
-	else if (bio->unsigned int == 8) 
+	else if (bio->ext4_type_for_stoneneedle == 8) 
 		calc_bucket_account(io_data->write_ext4_journal_per_chunk, bio,
 			    io_data->bucket_size);
 	/* undefined */
