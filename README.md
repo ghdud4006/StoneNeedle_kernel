@@ -20,7 +20,7 @@ Adding Ctags & Cscope
 5 : directory inode  
 6 : regular file data block  
 7 : directory data block  
-8 : journal data  
+8 : journal data **호영 (054b8a654d02d3de2f2106ec7458e2b843d2f0b9)**  
 
 아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
 
