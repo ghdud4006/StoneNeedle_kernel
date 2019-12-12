@@ -10,10 +10,7 @@ Adding Ctags & Cscope
 
 
 
-## unsigned int 형으로  
-## buffer_head->fs_component_type  
-## bio->fs_component_type  
-## 라는 필드 파놓음  
+## unsigned int 형으로 buffer_head->fs_component_type랑 bio->fs_component_type 라는 필드 파놓음  
 
 0 : superblock  
 1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1).  
