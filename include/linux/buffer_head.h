@@ -76,6 +76,7 @@ struct buffer_head {
 						   associated with */
 	atomic_t b_count;		/* users using this buffer_head */
 	
+	unsigned int ext4_type_for_stoneneedle; /* hoyoung add */
 };
 
 /*
