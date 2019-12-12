@@ -76,7 +76,6 @@ struct buffer_head {
 						   associated with */
 	atomic_t b_count;		/* users using this buffer_head */
 	
-	int fs_component_type; 		/* for StoneNeeedle(file system's component type) */
 };
 
 /*

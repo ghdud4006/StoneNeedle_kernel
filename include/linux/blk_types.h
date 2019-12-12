@@ -94,7 +94,6 @@ struct bio {
 	 */
 	struct bio_vec		bi_inline_vecs[0];
 
-	int fs_component_type; 		/* for StoneNeedle (file system's component type) */
 };
 
 #define BIO_RESET_BYTES		offsetof(struct bio, bi_max_vecs)
