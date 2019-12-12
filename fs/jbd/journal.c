@@ -325,7 +325,8 @@ int journal_write_metadata_buffer(transaction_t *transaction,
 	 * decided to launch a writepage() against this buffer.
 	 */
 	J_ASSERT_BH(bh_in, buffer_jbddirty(bh_in));
-
+	
+	/* Hoyoung: journaling code */
 	new_bh = alloc_buffer_head(GFP_NOFS|__GFP_NOFAIL);
 	/* keep subsequent assertions sane */
 	atomic_set(&new_bh->b_count, 1);
