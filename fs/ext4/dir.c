@@ -597,6 +597,7 @@ static int ext4_release_dir(struct inode *inode, struct file *filp)
 	return 0;
 }
 
+//sungwoo ext4_dir_operations
 const struct file_operations ext4_dir_operations = {
 	.llseek		= ext4_dir_llseek,
 	.read		= generic_read_dir,
