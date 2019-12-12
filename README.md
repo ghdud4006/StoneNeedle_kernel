@@ -13,14 +13,14 @@ Adding Ctags & Cscope
 ## 일단 int 형으로 buffer_head->fs_component_type, bio->fs_component_type 라는 필드 파놓음 
 
 0 : superblock  
-1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1)
+1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1).
 2 : block bitmap  
 3 : inode bitmap  
 4 : regular file inode  
 5 : directory inode  
 6 : regular file data block  
 7 : directory data block  
-8 : journal data  
+8 : journal data  **호영 (054b8a654d02d3de2f2106ec7458e2b843d2f0b9)**  
 
 아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
 
