@@ -1821,6 +1821,7 @@ out:
  * But since we don't do any block allocation we should not deadlock.
  * Page also have the dirty flag cleared so we don't get recurive page_lock.
  */
+/*When does the submit bio happen - kwonje*/
 static int ext4_writepage(struct page *page,
 			  struct writeback_control *wbc)
 {

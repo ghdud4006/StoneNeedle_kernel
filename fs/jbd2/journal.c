@@ -372,6 +372,7 @@ int jbd2_journal_write_metadata_buffer(transaction_t *transaction,
 	J_ASSERT_BH(bh_in, buffer_jbddirty(bh_in));
 
 retry_alloc:
+	/* Hoyoung: journaling alloc*/
 	new_bh = alloc_buffer_head(GFP_NOFS);
 	if (!new_bh) {
 		/*
@@ -2430,6 +2431,7 @@ repeat:
 		new_jh = NULL;		/* We consumed it */
 		set_buffer_jbd(bh);
 		bh->b_private = jh;
+		// journal_head->b_bh = inode_bitmap_bh; - daeyeon
 		jh->b_bh = bh;
 		get_bh(bh);
 		BUFFER_TRACE(bh, "added journal_head");

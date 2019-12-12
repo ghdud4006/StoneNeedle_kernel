@@ -60,6 +60,8 @@ struct bio {
 	unsigned int		bi_seg_front_size;
 	unsigned int		bi_seg_back_size;
 
+	unsigned int 		ext4_type_for_stoneneedle;
+
 	bio_end_io_t		*bi_end_io;
 
 	void			*bi_private;
@@ -94,7 +96,6 @@ struct bio {
 	 */
 	struct bio_vec		bi_inline_vecs[0];
 
-	int fs_component_type; 		/* for StoneNeedle (file system's component type) */
 };
 
 #define BIO_RESET_BYTES		offsetof(struct bio, bi_max_vecs)

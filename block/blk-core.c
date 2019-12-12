@@ -1849,7 +1849,7 @@ EXPORT_SYMBOL(generic_make_request);
 void submit_bio(int rw, struct bio *bio)
 {
 	bio->bi_rw |= rw;
-
+	
 	/*
 	 * If it's a regular read/write or a barrier with data attached,
 	 * go through the normal accounting stuff before submission.
@@ -1879,6 +1879,7 @@ void submit_bio(int rw, struct bio *bio)
 				count);
 		}
 	}
+
 
 	generic_make_request(bio);
 }
