@@ -374,7 +374,7 @@ static int io_submit_init_bio(struct ext4_io_submit *io,
 	bio->bi_end_io = ext4_end_bio;
 	bio->bi_private = ext4_get_io_end(io->io_end);
 	/* hoyoung add: convey type from bh to bio */
-	bio.ext4_type_for_stoneneedle = bh.ext4_type_for_stoneneedle; 
+	bio->ext4_type_for_stoneneedle = bh->ext4_type_for_stoneneedle; 
 	io->io_bio = bio;
 	io->io_next_block = bh->b_blocknr;
 	return 0;
@@ -388,7 +388,7 @@ static int io_submit_add_bh(struct ext4_io_submit *io,
 	int ret;
 
 	/* hoyoung add: test type setting */	
-	bh.ext4_type_for_stoneneedle = 0;
+	bh->ext4_type_for_stoneneedle = 0;
 
 	if (io->io_bio && bh->b_blocknr != io->io_next_block) {
 submit_and_retry:

@@ -1880,7 +1880,7 @@ void submit_bio(int rw, struct bio *bio)
 		}
 	}
 
-	printk("stoneneedle bio test:%u", bio.ext4_type_for_stoneneedle);
+	printk("stoneneedle bio test:%u", bio->ext4_type_for_stoneneedle);
 	generic_make_request(bio);
 }
 EXPORT_SYMBOL(submit_bio);
