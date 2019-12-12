@@ -68,7 +68,6 @@ enum stoneneedle_index_item {
 	STONENEEDLE_READ_COUNT_PER_CHUNK,
 	/* add other paramter here */
 	STONENEEDLE_MAX,
-	STONENEEDLE_WRITE_FS_SUPERBLOCK_PER_CHUNK,
 };
 
 const char *const device_status[] = { "stop", "start" };
@@ -102,7 +101,6 @@ const char *const stoneneedle_text[] = {
 	"READ_SEQUENTIAL_BYTES_PER_CHUNK:",
 	"WRITE_COUNT_PER_CHUNK:",
 	"READ_COUNT_PER_CHUNK:",
-	"WRITE_FS_SUPERBLOCK_PER_CHUNK:",
 };
 
 struct histlog2 {
@@ -124,7 +122,6 @@ struct stoneneedle_data {
 	unsigned long *read_seq_bytes_per_chunk;
 	unsigned long *write_count_per_chunk;
 	unsigned long *read_count_per_chunk;
-	unsigned long *write_fs_superblock_per_chunk;	// Hoyoung: add inode count params
 	sector_t bucket_size;
 	spinlock_t lock;
 };
@@ -372,17 +369,6 @@ static int stoneneedle_write_count_chunk_show(struct seq_file *m, int offset,
 	return 0;
 }
 
-/* Hoyoung Add */
-static int stoneneedle_write_fs_superblock_chunk_show(struct seq_file *m, int offset,
-					    	    struct stoneneedle_data *io_data)
-{
-	seq_printf(m, "%s ", stoneneedle_text[offset]);
-	stoneneedle_row_show(m, io_data->write_fs_superblock_per_chunk,
-			   dev_mgmt->stoneneedle_chunk_size);
-
-	return 0;
-}
-
 static int stoneneedle_common_show(struct seq_file *m, int offset,
 				 struct stoneneedle_data *io_data)
 {
@@ -420,7 +406,6 @@ oper_func stoneneedle_show_list = {
 	stoneneedle_read_seq_bytes_chunk_show,	/*"READ_SEQUETIAL_BYTES_PER_CHUNK:", */
 	stoneneedle_write_count_chunk_show,	/*"WRITE_COUNT_PER_CHUNK:", */
 	stoneneedle_read_count_chunk_show,	/*"READ_COUNT_PER_CHUNK:", */
-	stoneneedle_write_fs_superblock_chunk_show,	/*"WRITE_FS_SUPERBLOCK_PER_CHUNK:", */
 };
 
 static int stoneneedle_show(struct seq_file *m, void *arg)
@@ -493,9 +478,6 @@ static void stoneneedle_dev_data_clear(struct stoneneedle_dev *sn_dev)
 	memset(sn_dev->dev_data.read_count_per_chunk, 0,
 	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
 	memset(sn_dev->dev_data.write_count_per_chunk, 0,
-	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
-	/* Hoyoung Add */
-	memset(sn_dev->dev_data.write_fs_superblock_per_chunk, 0 , 
 	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
 	return;
 }
@@ -742,7 +724,6 @@ static unsigned int calc_chunk_index(unsigned int index)
 	return index;
 }
 
-/* Hoyoung: function start point*/
 static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 				 struct stoneneedle_dev *sn_dev)
 {
@@ -770,50 +751,6 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 	io_data->stoneneedle_value[STONENEEDLE_TOTAL_WRITE_BYTES] += rq_bytes;
 	calc_bucket_account(io_data->write_count_per_chunk, bio,
 			    io_data->bucket_size);
-
-	/* Hoyoung: Classify bio->fs_component_type by Ext4 component*/
-
-	/* super block */
-	if (bio->fs_component_type == 0)
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* group descriptor */
-	else if (bio->fs_component_type == 1) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);	
-	/* block bitmap */
-	else if (bio->fs_component_type == 2) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* inode bitmap */
-	else if (bio->fs_component_type == 3) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* regular file inode */
-	else if (bio->fs_component_type == 4) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* directory inode */
-	else if (bio->fs_component_type == 5) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* regular file data block */
-	else if (bio->fs_component_type == 6) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* directory data block */
-	else if (bio->fs_component_type == 7) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* journal data */
-	else if (bio->fs_component_type == 8) 
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-	/* undefined */
-	else  
-		calc_bucket_account(io_data->write_fs_superblock_per_chunk, bio,
-			    io_data->bucket_size);
-		
 	spin_unlock(&sn_dev->dev_data.lock);
 
 	calc_io_arrival_interval(sn_dev, STONENEEDLE_WRITE);
@@ -999,20 +936,8 @@ static int alloc_dev_data(struct stoneneedle_data *io_data, sector_t dev_capacit
 		    GFP_ATOMIC);
 	if (!io_data->read_count_per_chunk)
 		goto free_write_count_per_chunk;
-	
-	/* Hoyoung Add */
-	io_data->write_fs_superblock_per_chunk =
-	    kzalloc(sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size,
-		    GFP_ATOMIC);
-	if (!io_data->write_fs_superblock_per_chunk)
-		goto free_read_count_per_chunk;
-	
-
 	return 0;
 
-/*Hoyoung Add*/
-free_read_count_per_chunk:
-	kfree(io_data->read_count_per_chunk);
 free_write_count_per_chunk:
 	kfree(io_data->write_count_per_chunk);
 free_read_seq_bytes_per_chunk:
@@ -1160,9 +1085,6 @@ void release_stoneneedle(const char *dev_name)
 
 	if (io_data->write_count_per_chunk)
 		kfree(io_data->write_count_per_chunk);
-
-	if (io_data->write_fs_superblock_per_chunk)
-		kfree(io_data->write_fs_superblock_per_chunk);
 
 	list_del(&sn_dev->list);
 	kfree(sn_dev);
