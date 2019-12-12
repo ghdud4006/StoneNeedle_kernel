@@ -372,6 +372,7 @@ int jbd2_journal_write_metadata_buffer(transaction_t *transaction,
 	J_ASSERT_BH(bh_in, buffer_jbddirty(bh_in));
 
 retry_alloc:
+	/* Hoyoung: journaling alloc*/
 	new_bh = alloc_buffer_head(GFP_NOFS);
 	if (!new_bh) {
 		/*
