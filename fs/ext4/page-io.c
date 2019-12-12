@@ -342,6 +342,7 @@ void ext4_io_submit(struct ext4_io_submit *io)
 
 	if (bio) {
 		bio_get(io->io_bio);
+		/*hoyound add*/
 		submit_bio(io->io_op, io->io_bio);
 		BUG_ON(bio_flagged(io->io_bio, BIO_EOPNOTSUPP));
 		bio_put(io->io_bio);
@@ -357,6 +358,8 @@ void ext4_io_submit_init(struct ext4_io_submit *io,
 	io->io_end = NULL;
 }
 
+
+/* hoyoung: init bio point ! */
 static int io_submit_init_bio(struct ext4_io_submit *io,
 			      struct buffer_head *bh)
 {
@@ -370,16 +373,22 @@ static int io_submit_init_bio(struct ext4_io_submit *io,
 	bio->bi_bdev = bh->b_bdev;
 	bio->bi_end_io = ext4_end_bio;
 	bio->bi_private = ext4_get_io_end(io->io_end);
+	/* hoyoung add: convey type from bh to bio */
+	bio.ext4_type_for_stoneneedle = bh.ext4_type_for_stoneneedle; 
 	io->io_bio = bio;
 	io->io_next_block = bh->b_blocknr;
 	return 0;
 }
 
+/* hoyoung add bh to bio? */
 static int io_submit_add_bh(struct ext4_io_submit *io,
 			    struct inode *inode,
 			    struct buffer_head *bh)
 {
 	int ret;
+
+	/* hoyoung add: test type setting */	
+	bh.ext4_type_for_stoneneedle = 0;
 
 	if (io->io_bio && bh->b_blocknr != io->io_next_block) {
 submit_and_retry:
