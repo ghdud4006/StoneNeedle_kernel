@@ -17,7 +17,7 @@ Adding Ctags & Cscope
 2 : block bitmap  
 3 : inode bitmap  
 4 : regular file inode  
-5 : directory inode  
+5 : directory inode  - ext4_append(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/da4d07ea899a574496dbb9af0be3a76ecd6b1bc0).
 6 : regular file data block  
 7 : directory data block  
 8 : journal data  **호영 (054b8a654d02d3de2f2106ec7458e2b843d2f0b9)**  
