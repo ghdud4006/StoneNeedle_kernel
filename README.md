@@ -21,7 +21,7 @@ Adding Ctags & Cscope
 	mkdir - ext4_append(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/da4d07ea899a574496dbb9af0be3a76ecd6b1bc0).  
 6 : regular file data block  
 7 : directory data block  
-8 : journal data  **호영 (054b8a654d02d3de2f2106ec7458e2b843d2f0b9)**  
+8 : journal data  [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/054b8a654d02d3de2f2106ec7458e2b843d2f0b9).
 
 아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
 
