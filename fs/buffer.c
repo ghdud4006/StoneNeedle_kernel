@@ -898,6 +898,9 @@ try_again:
 
 		bh->b_size = size;
 
+		/* hoyoung: initiallize ext4 type*/
+		bh->ext4_type_for_stoneneedle = 9;
+		
 		/* Link the buffer to its page */
 		set_bh_page(bh, page, offset);
 	}
