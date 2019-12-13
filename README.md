@@ -24,10 +24,20 @@ Adding Ctags & Cscope
 7 : directory data block  
 8 : journal data  [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1df8117167be910fa8e952d6aba9b4071818bbed).
 
-아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
+
+## bh의 필드에 type 남기는 법 (예시)
 
 ```c
-  /* superblock */
+	/* journal data 일 경우 */
+	bh->ext4_type_for_stoneneedle = 8; 
+```
+
+
+
+## 아래 코드로 StoneNeedle 모듈이 bio 로부터 type 받으니 참고  
+
+```c
+  	/* superblock */
   	if (bio->ext4_type_for_stoneneedle == 0)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
 			    io_data->bucket_size);
