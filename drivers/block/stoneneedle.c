@@ -67,7 +67,6 @@ enum stoneneedle_index_item {
 	STONENEEDLE_WRITE_COUNT_PER_CHUNK,
 	STONENEEDLE_READ_COUNT_PER_CHUNK,
 	/* add other paramter here */
-	STONENEEDLE_MAX,
 	STONENEEDLE_WRITE_EXT4_SB_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_GDESC_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_B_BMAP_PER_CHUNK,
@@ -77,6 +76,7 @@ enum stoneneedle_index_item {
 	STONENEEDLE_WRITE_EXT4_R_BLOCK_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_D_BLOCK_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_JOURNAL_PER_CHUNK,
+	STONENEEDLE_MAX,
 };
 
 const char *const device_status[] = { "stop", "start" };
@@ -1362,8 +1362,8 @@ void release_stoneneedle(const char *dev_name)
 	if (io_data->write_ext4_sb_per_chunk)
 		kfree(io_data->write_ext4_sb_per_chunk);
 
-	if (io_data->write_ext4_g_desc_per_chunk)
-		kfree(io_data->write_ext4_g_desc_per_chunk);
+	if (io_data->write_ext4_gdesc_per_chunk)
+		kfree(io_data->write_ext4_gdesc_per_chunk);
 
 	if (io_data->write_ext4_b_bmap_per_chunk)
 		kfree(io_data->write_ext4_b_bmap_per_chunk);

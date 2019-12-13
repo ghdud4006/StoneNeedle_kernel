@@ -949,6 +949,10 @@ restart_loop:
 		 * done with it.
 		 */
 		get_bh(bh);
+		
+		/* hoyoung: journal code_ retry */
+		bh->ext4_type_for_stoneneedle = 8;
+		
 		jbd_lock_bh_state(bh);
 		J_ASSERT_JH(jh,	jh->b_transaction == commit_transaction);
 
