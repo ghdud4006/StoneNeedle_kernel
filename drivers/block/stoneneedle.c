@@ -609,6 +609,23 @@ static void stoneneedle_dev_data_clear(struct stoneneedle_dev *sn_dev)
 	/* Hoyoung Add */
 	memset(sn_dev->dev_data.write_ext4_sb_per_chunk, 0 , 
 	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_gdesc_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_b_bmap_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_i_bmap_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_r_inode_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_d_inode_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_r_block_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_d_block_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+	memset(sn_dev->dev_data.write_ext4_journal_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
+
 	return;
 }
 

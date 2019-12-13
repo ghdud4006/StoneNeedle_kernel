@@ -388,7 +388,7 @@ static int io_submit_add_bh(struct ext4_io_submit *io,
 	int ret;
 
 	/* hoyoung add: test type setting */	
-	bh->ext4_type_for_stoneneedle = 0;
+	bh->ext4_type_for_stoneneedle = 1;
 
 	if (io->io_bio && bh->b_blocknr != io->io_next_block) {
 submit_and_retry:
