@@ -1881,10 +1881,10 @@ void submit_bio(int rw, struct bio *bio)
 	}
 
 	/* hoyoung: printk bio */	
-	if((bio->ext4_type_for_stoneneedle>-1) && (bio->ext4_type_for_stoneneedle<9))
-		printk("stoneneedle bio test:%u \n", bio->ext4_type_for_stoneneedle);
-	else
-		printk("stoneneedle bio test: not initiallized\n");	
+	//if((bio->ext4_type_for_stoneneedle>-1) && (bio->ext4_type_for_stoneneedle<9))
+	printk(KERN_INFO "stoneneedle bio test:%u \n", bio->ext4_type_for_stoneneedle);
+	//else
+	//	printk(KERN_INFO " stoneneedle bio test: not initiallized\n");	
 	generic_make_request(bio);
 }
 EXPORT_SYMBOL(submit_bio);
