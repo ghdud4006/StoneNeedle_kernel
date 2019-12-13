@@ -22,7 +22,7 @@ Adding Ctags & Cscope
 	rename [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/9dd949242784af2f2f0d4ad1fe1a74b74713d003).  
 6 : regular file data block [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/908ae75dcfbb3f0a6047739f4a41e36a9a814778).  
 7 : directory data block  
-8 : journal data  [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1df8117167be910fa8e952d6aba9b4071818bbed).
+8 : journal data  [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1df8117167be910fa8e952d6aba9b4071818bbed).
 
 
 ## bh의 필드에 type 남기는 법 (예시)
