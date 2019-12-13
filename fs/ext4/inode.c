@@ -4279,6 +4279,7 @@ static int ext4_inode_blocks_set(handle_t *handle,
  *
  * The caller must have write access to iloc->bh.
  */
+/*Update inode -kwonje*/
 static int ext4_do_update_inode(handle_t *handle,
 				struct inode *inode,
 				struct ext4_iloc *iloc)
