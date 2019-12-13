@@ -331,6 +331,8 @@ static void free_buffers(struct page *page)
  * This usage is similar to how swap files are handled, and allows us
  * to write to a file with no concerns of memory allocation failing.
  */
+
+// read_page: bitmap buffer_head allocation - daeyeon
 static int read_page(struct file *file, unsigned long index,
 		     struct bitmap *bitmap,
 		     unsigned long count,
