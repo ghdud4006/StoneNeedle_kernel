@@ -1362,6 +1362,30 @@ void release_stoneneedle(const char *dev_name)
 	if (io_data->write_ext4_sb_per_chunk)
 		kfree(io_data->write_ext4_sb_per_chunk);
 
+	if (io_data->write_ext4_g_desc_per_chunk)
+		kfree(io_data->write_ext4_g_desc_per_chunk);
+
+	if (io_data->write_ext4_b_bmap_per_chunk)
+		kfree(io_data->write_ext4_b_bmap_per_chunk);
+
+	if (io_data->write_ext4_i_bmap_per_chunk)
+		kfree(io_data->write_ext4_i_bmap_per_chunk);
+
+	if (io_data->write_ext4_r_inode_per_chunk)
+		kfree(io_data->write_ext4_r_inode_per_chunk);
+
+	if (io_data->write_ext4_d_inode_per_chunk)
+		kfree(io_data->write_ext4_d_inode_per_chunk);
+
+	if (io_data->write_ext4_r_block_per_chunk)
+		kfree(io_data->write_ext4_r_block_per_chunk);
+
+	if (io_data->write_ext4_d_block_per_chunk)
+		kfree(io_data->write_ext4_d_block_per_chunk);
+
+	if (io_data->write_ext4_journal_per_chunk)
+		kfree(io_data->write_ext4_journal_per_chunk);
+
 	list_del(&sn_dev->list);
 	kfree(sn_dev);
 	dev_mgmt->stoneneedle_dev_num--;
