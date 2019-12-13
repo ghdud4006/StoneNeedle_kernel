@@ -293,8 +293,10 @@ struct ext4_group_desc * ext4_get_group_desc(struct super_block *sb,
 	desc = (struct ext4_group_desc *)(
 		(__u8 *)sbi->s_group_desc[group_desc]->b_data +
 		offset * EXT4_DESC_SIZE(sb));
-	if (bh)
+	if (bh) {
 		*bh = sbi->s_group_desc[group_desc];
+		// (*bh)->ext4_type_for_stoneneedle = 1; // daeyeon
+	}
 	return desc;
 }
 
@@ -401,7 +403,9 @@ ext4_read_block_bitmap_nowait(struct super_block *sb, ext4_group_t block_group)
 	if (!desc)
 		return NULL;
 	bitmap_blk = ext4_block_bitmap(sb, desc);
+	// block_bitmap buffer_head get - daeyeon
 	bh = sb_getblk(sb, bitmap_blk);
+	// bh->ext4_type_for_stoneneedle = 2; // daeyeon
 	if (unlikely(!bh)) {
 		ext4_error(sb, "Cannot get buffer for block bitmap - "
 			   "block_group = %u, block_bitmap = %llu",

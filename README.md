@@ -12,10 +12,11 @@ Adding Ctags & Cscope
 
 ## unsigned int 형으로 buffer_head->ext4_type_for_stoneneedle 랑 bio->ext4_type_for_stoneneedle 라는 필드 파놓음  
 
-0 : superblock  
-1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1).  
-2 : block bitmap  
-3 : inode bitmap  
+0 : superblock  [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1ee82346958eb81c3f16a5c5bc866d25c15a4cb4).
+
+1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1), [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/0116d24a361fad7b0e443bc5a07510bf20b1ea1d).   
+2 : block bitmap  [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/a509d7b2b2f54de477d54c820ff70ac1dd67bc99).  
+3 : inode bitmap  [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/681e51e636ea4414a68501d0af2bae63558d5a3b).  
 4 : regular file inode  
 5 : directory inode  
 	mkdir - ext4_append(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/da4d07ea899a574496dbb9af0be3a76ecd6b1bc0).  
