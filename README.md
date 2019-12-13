@@ -18,7 +18,7 @@ Adding Ctags & Cscope
 3 : inode bitmap  [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/681e51e636ea4414a68501d0af2bae63558d5a3b).  
 4 : regular file inode  
 5 : directory inode  
-	create - ext4_add_entry(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/5b195b7d0e7adf2fc66c35eb77668c9c9aa7a336).
+	create - ext4_add_entry(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/5b195b7d0e7adf2fc66c35eb77668c9c9aa7a336). 
 	mkdir - ext4_append(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/da4d07ea899a574496dbb9af0be3a76ecd6b1bc0).  
 	rename [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/9dd949242784af2f2f0d4ad1fe1a74b74713d003).  
 6 : regular file data block [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/908ae75dcfbb3f0a6047739f4a41e36a9a814778).  
