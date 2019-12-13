@@ -1880,7 +1880,11 @@ void submit_bio(int rw, struct bio *bio)
 		}
 	}
 
-	printk("stoneneedle bio test:%u", bio->ext4_type_for_stoneneedle);
+	/* hoyoung: printk bio */	
+	if((bio->ext4_type_for_stoneneedle>0) && (bio->ext4_type_for_stoneneedle<9))
+		printk("stoneneedle bio test:%u \n", bio->ext4_type_for_stoneneedle);
+	else
+	
 	generic_make_request(bio);
 }
 EXPORT_SYMBOL(submit_bio);
