@@ -3067,6 +3067,9 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 		rw |= REQ_PRIO;
 
 	bio_get(bio);
+	// hoyoung add
+	bio->ext4_type_for_stoneneedle = bh->ext4_type_for_stoneneedle;
+
 	submit_bio(rw, bio);
 
 	if (bio_flagged(bio, BIO_EOPNOTSUPP))
