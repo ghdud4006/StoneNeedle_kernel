@@ -688,6 +688,7 @@ out:
  * For other inodes, search forward from the parent directory's block
  * group to find a free inode.
  */
+/*allocating inode! - kwonje*/
 struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
 			       umode_t mode, const struct qstr *qstr,
 			       __u32 goal, uid_t *owner, int handle_type,
