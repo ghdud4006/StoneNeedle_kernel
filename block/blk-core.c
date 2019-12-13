@@ -1881,7 +1881,7 @@ void submit_bio(int rw, struct bio *bio)
 	}
 
 	/* hoyoung: printk bio */	
-	if((bio->ext4_type_for_stoneneedle>0) && (bio->ext4_type_for_stoneneedle<9))
+	if((bio->ext4_type_for_stoneneedle>-1) && (bio->ext4_type_for_stoneneedle<9))
 		printk("stoneneedle bio test:%u \n", bio->ext4_type_for_stoneneedle);
 	else
 		printk("stoneneedle bio test: not initiallized\n");	
