@@ -723,6 +723,7 @@ void jbd2_journal_commit_transaction(journal_t *journal)
 			tag->t_flags |= cpu_to_be16(JBD2_FLAG_LAST_TAG);
 
 			jbd2_descr_block_csum_set(journal, descriptor);
+/* hoyoung: journal io start */
 start_journal_io:
 			for (i = 0; i < bufs; i++) {
 				struct buffer_head *bh = wbuf[i];
@@ -739,6 +740,9 @@ start_journal_io:
 				clear_buffer_dirty(bh);
 				set_buffer_uptodate(bh);
 				bh->b_end_io = journal_end_buffer_io_sync;
+				
+				/* hoyoung: input type journal to bh */
+				bh->ext4_type_for_stoneneedle = 8;	
 				submit_bh(WRITE_SYNC, bh);
 			}
 			cond_resched();
