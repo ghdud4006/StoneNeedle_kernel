@@ -254,7 +254,9 @@ struct vm_operations_struct {
 struct mmu_gather;
 struct inode;
 
+// page_private: get buffer_head of page - daeyeon
 #define page_private(page)		((page)->private)
+// set_page_private: set buffer_head of page - daeyeon
 #define set_page_private(page, v)	((page)->private = (v))
 
 /* It's valid only if the page is free path or free_list */
