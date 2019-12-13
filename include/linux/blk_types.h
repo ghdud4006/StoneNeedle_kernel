@@ -60,7 +60,7 @@ struct bio {
 	unsigned int		bi_seg_front_size;
 	unsigned int		bi_seg_back_size;
 
-	unsigned int 		ext4_type_for_stoneneedle;
+	unsigned int 		ext4_type_for_stoneneedle; /* hoyoung add */
 
 	bio_end_io_t		*bi_end_io;
 

@@ -1921,6 +1921,8 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 	blocks = dir->i_size >> sb->s_blocksize_bits;
 	for (block = 0; block < blocks; block++) {
 		bh = ext4_read_dirblock(dir, block, DIRENT);
+		//sungwoo dir ext4_add_entry bh area
+		//bh->ext4_type_for_stoneneedle=5
 		if (IS_ERR(bh))
 			return PTR_ERR(bh);
 

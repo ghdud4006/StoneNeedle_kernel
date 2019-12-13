@@ -3688,6 +3688,7 @@ static int ext4_fill_super(struct super_block *sb, void *data, int silent)
 					sbi->s_inodes_per_block;
 	sbi->s_desc_per_block = blocksize / EXT4_DESC_SIZE(sb);
 	sbi->s_sbh = bh;
+	// sbi->s_sbh->ext4_type_for_stoneneedle = 0; // daeyeon
 	sbi->s_mount_state = le16_to_cpu(es->s_state);
 	sbi->s_addr_per_block_bits = ilog2(EXT4_ADDR_PER_BLOCK(sb));
 	sbi->s_desc_per_block_bits = ilog2(EXT4_DESC_PER_BLOCK(sb));
