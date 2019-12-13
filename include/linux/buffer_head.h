@@ -265,6 +265,7 @@ void buffer_init(void);
  * inline definitions
  */
 
+// attach_page_buffers: get page cache and set buffer_head - daeyeon
 static inline void attach_page_buffers(struct page *page,
 		struct buffer_head *head)
 {
