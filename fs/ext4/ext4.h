@@ -1611,6 +1611,7 @@ static inline void ext4_clear_state_flags(struct ext4_inode_info *ei)
  */
 #define EXT4_NAME_LEN 255
 
+// ext4_dir_entry: directory entry structure - daeyeon
 struct ext4_dir_entry {
 	__le32	inode;			/* Inode number */
 	__le16	rec_len;		/* Directory entry length */
