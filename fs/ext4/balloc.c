@@ -293,8 +293,10 @@ struct ext4_group_desc * ext4_get_group_desc(struct super_block *sb,
 	desc = (struct ext4_group_desc *)(
 		(__u8 *)sbi->s_group_desc[group_desc]->b_data +
 		offset * EXT4_DESC_SIZE(sb));
-	if (bh)
+	if (bh) {
 		*bh = sbi->s_group_desc[group_desc];
+		// (*bh)->ext4_type_for_stoneneedle = 1; // daeyeon
+	}
 	return desc;
 }
 
