@@ -21,7 +21,7 @@ Adding Ctags & Cscope
 	create - ext4_add_entry(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/5b195b7d0e7adf2fc66c35eb77668c9c9aa7a336).  
 	mkdir - ext4_append(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/da4d07ea899a574496dbb9af0be3a76ecd6b1bc0).  
 	rename [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/9dd949242784af2f2f0d4ad1fe1a74b74713d003).  
-	[Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/40382d2a6a4ec15897c6b185da5ef93e0148f9a1).
+	[Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/40382d2a6a4ec15897c6b185da5ef93e0148f9a1).  
 7 : regular file data block [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/908ae75dcfbb3f0a6047739f4a41e36a9a814778). 
 8 : directory data block  
 9 : journal data  [Code](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1df8117167be910fa8e952d6aba9b4071818bbed).
