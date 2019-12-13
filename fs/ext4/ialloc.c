@@ -124,7 +124,8 @@ ext4_read_inode_bitmap(struct super_block *sb, ext4_group_t block_group)
 	bitmap_blk = ext4_inode_bitmap(sb, desc);
 	// inode_bitmap buffer_head get - daeyeon
 	bh = sb_getblk(sb, bitmap_blk);
-	// bh->ext4_type_for_stoneneedle = 3;
+	/* daeyeon */
+	bh->ext4_type_for_stoneneedle = 4;
 	if (unlikely(!bh)) {
 		ext4_error(sb, "Cannot read inode bitmap - "
 			    "block_group = %u, inode_bitmap = %llu",
