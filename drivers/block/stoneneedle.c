@@ -902,40 +902,40 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 
 	/* Hoyoung: Classify bio->fs_component_type by Ext4 component*/
 
-	/* super block */
-	if (bio->ext4_type_for_stoneneedle == 0)
+	/* superblock */
+	if (bio->ext4_type_for_stoneneedle == 1)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
 			    io_data->bucket_size);
 	/* group descriptor */
-	else if (bio->ext4_type_for_stoneneedle == 1) 
-		calc_bucket_account(io_data->write_ext4_gdesc_per_chunk, bio,   ////////////////////point
+	else if (bio->ext4_type_for_stoneneedle == 2) 
+		calc_bucket_account(io_data->write_ext4_gdesc_per_chunk, bio,   
 			    io_data->bucket_size);	
 	/* block bitmap */
-	else if (bio->ext4_type_for_stoneneedle == 2) 
+	else if (bio->ext4_type_for_stoneneedle == 3) 
 		calc_bucket_account(io_data->write_ext4_b_bmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* inode bitmap */
-	else if (bio->ext4_type_for_stoneneedle == 3) 
+	else if (bio->ext4_type_for_stoneneedle == 4) 
 		calc_bucket_account(io_data->write_ext4_i_bmap_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file inode */
-	else if (bio->ext4_type_for_stoneneedle == 4) 
+	else if (bio->ext4_type_for_stoneneedle == 5) 
 		calc_bucket_account(io_data->write_ext4_r_inode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory inode */
-	else if (bio->ext4_type_for_stoneneedle == 5) 
+	else if (bio->ext4_type_for_stoneneedle == 6) 
 		calc_bucket_account(io_data->write_ext4_d_inode_per_chunk, bio,
 			    io_data->bucket_size);
 	/* regular file data block */
-	else if (bio->ext4_type_for_stoneneedle == 6) 
+	else if (bio->ext4_type_for_stoneneedle == 7) 
 		calc_bucket_account(io_data->write_ext4_r_block_per_chunk, bio,
 			    io_data->bucket_size);
 	/* directory data block */
-	else if (bio->ext4_type_for_stoneneedle == 7) 
+	else if (bio->ext4_type_for_stoneneedle == 8) 
 		calc_bucket_account(io_data->write_ext4_d_block_per_chunk, bio,
 			    io_data->bucket_size);
 	/* journal data */
-	else if (bio->ext4_type_for_stoneneedle == 8) 
+	else if (bio->ext4_type_for_stoneneedle == 9) 
 		calc_bucket_account(io_data->write_ext4_journal_per_chunk, bio,
 			    io_data->bucket_size);
 	/* undefined */
