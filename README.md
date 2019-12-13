@@ -13,7 +13,6 @@ Adding Ctags & Cscope
 ## unsigned int 형으로 buffer_head->ext4_type_for_stoneneedle 랑 bio->ext4_type_for_stoneneedle 라는 필드 파놓음  
 
 0 : superblock  [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/1ee82346958eb81c3f16a5c5bc866d25c15a4cb4)
-
 1 : group descriptor - ext4_fill_super(), [Link](https://github.com/ghdud4006/StoneNeedle_kernel/commit/63201855d557eeeeb517d77cb8af3356cc2a74e1).  
 2 : block bitmap  
 3 : inode bitmap  
