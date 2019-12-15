@@ -827,7 +827,9 @@ start_journal_io:
 		struct buffer_head *bh = list_entry(io_bufs.prev,
 						    struct buffer_head,
 						    b_assoc_buffers);
-
+		
+		/* hoyoung */
+		bh->ext4_type_for_stoneneedle = 9;
 		wait_on_buffer(bh);
 		cond_resched();
 

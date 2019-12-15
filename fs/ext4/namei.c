@@ -1923,7 +1923,7 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 		bh = ext4_read_dirblock(dir, block, DIRENT);
 		//sungwoo dir ext4_add_entry bh area
 		/* sungwoo */
-		//bh->ext4_type_for_stoneneedle=6;
+		bh->ext4_type_for_stoneneedle=6;
 		if (IS_ERR(bh))
 			return PTR_ERR(bh);
 
@@ -2395,7 +2395,7 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 	//sungwoo return buffer head ext4_append
 	dir_block = ext4_append(handle, inode, &block);
 	/* sungwoo */
-	//dir_block->ext4_type_for_stoneneedle=6;
+	dir_block->ext4_type_for_stoneneedle=6;
 
 	if (IS_ERR(dir_block))
 		return PTR_ERR(dir_block);
@@ -3067,7 +3067,7 @@ static int ext4_rename(struct inode *old_dir, struct dentry *old_dentry,
 
 	//sungwoo ext4_rename bh code
 	/* sungwoo */
-	//new_bh->ext4_type_for_stoneneedle=6;
+	new_bh->ext4_type_for_stoneneedle=6;
 
 	if (new_inode && !test_opt(new_dir->i_sb, NO_AUTO_DA_ALLOC))
 		ext4_alloc_da_blocks(old_inode);

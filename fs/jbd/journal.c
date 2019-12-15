@@ -329,6 +329,7 @@ int journal_write_metadata_buffer(transaction_t *transaction,
 	/* Hoyoung: journaling code */
 	new_bh = alloc_buffer_head(GFP_NOFS|__GFP_NOFAIL);
 	/* keep subsequent assertions sane */
+	new_bh->ext4_type_for_stoneneedle = 9;
 	atomic_set(&new_bh->b_count, 1);
 	new_jh = journal_add_journal_head(new_bh);	/* This sleeps */
 

@@ -1907,7 +1907,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 	head = create_page_buffers(page, inode, 0);
 
 	/* kwonje */
-	//head->ext4_type_for_stoneneedle = 7;
+	head->ext4_type_for_stoneneedle = 7;
 
 	blocksize = head->b_size;
 	bbits = block_size_bits(blocksize);
@@ -3070,7 +3070,7 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 
 	bio_get(bio);
 	// hoyoung add
-	printk("bh value:%u \n", bh->ext4_type_for_stoneneedle);
+	printk(KERN_INFO "bh value:%u \n", bh->ext4_type_for_stoneneedle);
 	bio->ext4_type_for_stoneneedle = bh->ext4_type_for_stoneneedle;
 
 	submit_bio(rw, bio);
@@ -3361,7 +3361,7 @@ struct buffer_head *alloc_buffer_head(gfp_t gfp_flags)
 		recalc_bh_state();
 		preempt_enable();
 		/* hoyoung */
-		ret->ext4_type_for_stoneneedle = 123;
+		ret->ext4_type_for_stoneneedle = 12;
 	}
 	return ret;
 }

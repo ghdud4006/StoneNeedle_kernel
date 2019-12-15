@@ -2388,6 +2388,7 @@ static int __writepage(struct page *page, struct writeback_control *wbc,
 	return ret;
 }
 
+/*hoyoung: write page*/
 static int ext4_writepages(struct address_space *mapping,
 			   struct writeback_control *wbc)
 {
