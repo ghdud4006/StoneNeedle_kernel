@@ -1923,7 +1923,7 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 		bh = ext4_read_dirblock(dir, block, DIRENT);
 		//sungwoo dir ext4_add_entry bh area
 		/* sungwoo */
-		//bh->ext4_type_for_stoneneedle=6;
+		bh->ext4_type_for_stoneneedle=6;
 		if (IS_ERR(bh))
 			return PTR_ERR(bh);
 
@@ -2394,8 +2394,6 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 
 	//sungwoo return buffer head ext4_append
 	dir_block = ext4_append(handle, inode, &block);
-	/* sungwoo */
-	//dir_block->ext4_type_for_stoneneedle=6;
 
 	if (IS_ERR(dir_block))
 		return PTR_ERR(dir_block);
@@ -2415,6 +2413,10 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 	err = ext4_handle_dirty_dirent_node(handle, inode, dir_block);
 	if (err)
 		goto out;
+	
+	/* sungwoo */	
+	dir_block->ext4_type_for_stoneneedle=6;
+
 	set_buffer_verified(dir_block);
 out:
 	brelse(dir_block);
