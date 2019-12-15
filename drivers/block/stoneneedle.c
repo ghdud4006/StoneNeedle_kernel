@@ -903,7 +903,11 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 	/* Hoyoung: Classify bio->fs_component_type by Ext4 component*/
 
 	printk(KERN_INFO "stoneneedle:%u \n", bio->ext4_type_for_stoneneedle);
-
+	
+	//test code
+	calc_bucket_account(io_data->write_ext4_r_block_per_chunk, bio,
+			    io_data->bucket_size);
+	//
 	/* superblock */
 	if (bio->ext4_type_for_stoneneedle == 1)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
@@ -940,13 +944,12 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 	else if (bio->ext4_type_for_stoneneedle == 9) 
 		calc_bucket_account(io_data->write_ext4_journal_per_chunk, bio,
 			    io_data->bucket_size);
-	/* undefined */
-	else  
-		printk("stoneneedle: bio that has no defined ext4 type: %u \n", bio->ext4_type_for_stoneneedle);
 		
 	spin_unlock(&sn_dev->dev_data.lock);
 
 	calc_io_arrival_interval(sn_dev, STONENEEDLE_WRITE);
+
+
 
 	index = calc_chunk_index(rq_bytes / STONENEEDLE_4KB_CHUNK);
 	spin_lock(&sn_dev->dev_data.lock);
