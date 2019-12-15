@@ -3362,7 +3362,7 @@ struct buffer_head *alloc_buffer_head(gfp_t gfp_flags)
 		recalc_bh_state();
 		preempt_enable();
 		/* hoyoung */
-		ret->ext4_type_for_stoneneedle = 12;
+		ret->ext4_type_for_stoneneedle = 0;
 	}
 	return ret;
 }
