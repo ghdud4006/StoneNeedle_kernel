@@ -3061,10 +3061,12 @@ static int ext4_rename(struct inode *old_dir, struct dentry *old_dentry,
 	new_bh = ext4_find_entry(new_dir, &new_dentry->d_name,
 				 &new_de, &new_inlined);
 	if (new_bh) {
+		/* sungwoo */
+		new_bh->ext4_type_for_stoneneedle = 6;
 		if (!new_inode) {
 			brelse(new_bh);
 			new_bh = NULL;
-		}
+		} 
 	}
 
 	//sungwoo ext4_rename bh code
