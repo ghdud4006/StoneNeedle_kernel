@@ -1907,7 +1907,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 	head = create_page_buffers(page, inode, 0);
 
 	/* kwonje */
-	head->ext4_type_for_stoneneedle = 7;
+	//head->ext4_type_for_stoneneedle = 7;
 
 	blocksize = head->b_size;
 	bbits = block_size_bits(blocksize);
