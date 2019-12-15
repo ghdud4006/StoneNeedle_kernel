@@ -902,6 +902,8 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 
 	/* Hoyoung: Classify bio->fs_component_type by Ext4 component*/
 
+	printk(KERN_INFO "stoneneedle:%u \n",ext4_type_for_stoneneedle);
+
 	/* superblock */
 	if (bio->ext4_type_for_stoneneedle == 1)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
