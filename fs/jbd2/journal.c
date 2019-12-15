@@ -374,7 +374,10 @@ int jbd2_journal_write_metadata_buffer(transaction_t *transaction,
 retry_alloc:
 	/* Hoyoung: journaling alloc*/
 	new_bh = alloc_buffer_head(GFP_NOFS);
-	new_bh->ext4_type_for_stoneneedle = 9;
+	
+	/* hoyoung */
+	//new_bh->ext4_type_for_stoneneedle = 9;
+	
 	if (!new_bh) {
 		/*
 		 * Failure is not an option, but __GFP_NOFAIL is going

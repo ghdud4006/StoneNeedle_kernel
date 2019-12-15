@@ -3068,11 +3068,6 @@ static int ext4_rename(struct inode *old_dir, struct dentry *old_dentry,
 			new_bh = NULL;
 		} 
 	}
-
-	//sungwoo ext4_rename bh code
-	/* sungwoo */
-	//new_bh->ext4_type_for_stoneneedle=6;
-
 	if (new_inode && !test_opt(new_dir->i_sb, NO_AUTO_DA_ALLOC))
 		ext4_alloc_da_blocks(old_inode);
 

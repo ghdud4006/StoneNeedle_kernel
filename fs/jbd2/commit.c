@@ -741,7 +741,7 @@ start_journal_io:
 				set_buffer_uptodate(bh);
 				bh->b_end_io = journal_end_buffer_io_sync;
 				
-				/* hoyoung: input type journal to bh */
+				/* hoyoung */
 				bh->ext4_type_for_stoneneedle = 9;	
 				submit_bh(WRITE_SYNC, bh);
 			}
@@ -952,7 +952,7 @@ restart_loop:
 		 */
 		get_bh(bh);
 		
-		/* hoyoung: journal code_ retry */
+		/* hoyoung */
 		bh->ext4_type_for_stoneneedle = 9;
 		
 		jbd_lock_bh_state(bh);

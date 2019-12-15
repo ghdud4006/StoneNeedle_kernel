@@ -297,7 +297,7 @@ struct ext4_group_desc * ext4_get_group_desc(struct super_block *sb,
 		*bh = sbi->s_group_desc[group_desc];
 		
 		/* daeyeon */
-		//(*bh)->ext4_type_for_stoneneedle = 2; 
+		(*bh)->ext4_type_for_stoneneedle = 2; 
 	}
 	return desc;
 }
