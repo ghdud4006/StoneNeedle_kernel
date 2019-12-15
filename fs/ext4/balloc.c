@@ -408,7 +408,7 @@ ext4_read_block_bitmap_nowait(struct super_block *sb, ext4_group_t block_group)
 	// block_bitmap buffer_head get - daeyeon
 	bh = sb_getblk(sb, bitmap_blk);
 	/* daeyeon */
-	bh->ext4_type_for_stoneneedle = 3; // daeyeon
+	//bh->ext4_type_for_stoneneedle = 3; // daeyeon
 
 	if (unlikely(!bh)) {
 		ext4_error(sb, "Cannot get buffer for block bitmap - "

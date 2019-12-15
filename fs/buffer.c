@@ -898,8 +898,6 @@ try_again:
 
 		bh->b_size = size;
 
-		/* hoyoung: initiallize ext4 type*/
-		bh->ext4_type_for_stoneneedle = 0;
 		
 		/* Link the buffer to its page */
 		set_bh_page(bh, page, offset);
@@ -1909,7 +1907,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 	head = create_page_buffers(page, inode, 0);
 
 	/* kwonje */
-	head->ext4_type_for_stoneneedle = 7;
+	//head->ext4_type_for_stoneneedle = 7;
 
 	blocksize = head->b_size;
 	bbits = block_size_bits(blocksize);
@@ -3361,6 +3359,8 @@ struct buffer_head *alloc_buffer_head(gfp_t gfp_flags)
 		__this_cpu_inc(bh_accounting.nr);
 		recalc_bh_state();
 		preempt_enable();
+		/* hoyoung */
+		ret->ext4_type_for_stoneneedle = 99;
 	}
 	return ret;
 }
