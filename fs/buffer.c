@@ -3070,6 +3070,7 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 
 	bio_get(bio);
 	// hoyoung add
+	printk("bh value:%u \n", bh->ext4_type_for_stoneneedle);
 	bio->ext4_type_for_stoneneedle = bh->ext4_type_for_stoneneedle;
 
 	submit_bio(rw, bio);
@@ -3360,7 +3361,7 @@ struct buffer_head *alloc_buffer_head(gfp_t gfp_flags)
 		recalc_bh_state();
 		preempt_enable();
 		/* hoyoung */
-		ret->ext4_type_for_stoneneedle = 99;
+		ret->ext4_type_for_stoneneedle = 123;
 	}
 	return ret;
 }
