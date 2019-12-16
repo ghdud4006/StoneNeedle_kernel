@@ -904,10 +904,6 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 
 	printk(KERN_INFO "stoneneedle:%u \n", bio->ext4_type_for_stoneneedle);
 	
-	//test code
-	calc_bucket_account(io_data->write_ext4_r_block_per_chunk, bio,
-			    io_data->bucket_size);
-	//
 	/* superblock */
 	if (bio->ext4_type_for_stoneneedle == 1)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
