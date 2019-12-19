@@ -1858,7 +1858,7 @@ void submit_bio(int rw, struct bio *bio)
 		unsigned int count;
 		
 		//sungwoo
-		bio->ext4_type_for_stoneneedle=bio->bi_io_vec->bv_page->ext4_type_for_stoneneedle;
+		bio->ext4_type_for_stoneneedle=bio->bi_io_vec[0].bv_page->ext4_type_for_stoneneedle;
 
 		if (unlikely(rw & REQ_WRITE_SAME))
 			count = bdev_logical_block_size(bio->bi_bdev) >> 9;
