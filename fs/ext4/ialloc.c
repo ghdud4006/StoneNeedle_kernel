@@ -272,6 +272,12 @@ void ext4_free_inode(handle_t *handle, struct inode *inode)
 	block_group = (ino - 1) / EXT4_INODES_PER_GROUP(sb);
 	bit = (ino - 1) % EXT4_INODES_PER_GROUP(sb);
 	bitmap_bh = ext4_read_inode_bitmap(sb, block_group);
+	
+	// add inode bitmap - daeyeon
+	//if (bitmap_bh) {
+	//	bitmap_bh->ext4_type_for_stoneneedle = 4;
+	//}
+
 	/* Don't bother if the inode bitmap is corrupt. */
 	grp = ext4_get_group_info(sb, block_group);
 	if (unlikely(EXT4_MB_GRP_IBITMAP_CORRUPT(grp)) || !bitmap_bh)
@@ -792,6 +798,10 @@ got_group:
 
 		brelse(inode_bitmap_bh);
 		inode_bitmap_bh = ext4_read_inode_bitmap(sb, group);
+		// add inode bitmap - daeyeon
+		//if (inode_bitmap_bh) {
+		//	inode_bitmap_bh->ext4_type_for_stoneneedle = 4;
+		//}
 		/* Skip groups with suspicious inode tables */
 		if (EXT4_MB_GRP_IBITMAP_CORRUPT(grp) || !inode_bitmap_bh) {
 			if (++group == ngroups)
@@ -1087,6 +1097,9 @@ struct inode *ext4_orphan_get(struct super_block *sb, unsigned long ino)
 		goto error;
 	}
 
+	// add inode bitmap - daeyeon
+	//bitmap_bh->ext4_type_for_stoneneedle = 4;
+
 	/* Having the inode bit set should be a 100% indicator that this
 	 * is a valid orphan (no e2fsck run on fs).  Orphans also include
 	 * inodes that were being truncated, so we can't check i_nlink==0.
@@ -1161,6 +1174,8 @@ unsigned long ext4_count_free_inodes(struct super_block *sb)
 		if (!bitmap_bh)
 			continue;
 
+		// add inode bitmap - daeyeon
+		// bitmap_bh->ext4_type_for_stoneneedle = 4;
 		x = ext4_count_free(bitmap_bh->b_data,
 				    EXT4_INODES_PER_GROUP(sb) / 8);
 		printk(KERN_DEBUG "group %lu: stored = %d, counted = %lu\n",
