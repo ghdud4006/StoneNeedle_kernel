@@ -1694,10 +1694,10 @@ static int __block_write_full_page(struct inode *inode, struct page *page,
 	int nr_underway = 0;
 	int write_op = (wbc->sync_mode == WB_SYNC_ALL ?
 			WRITE_SYNC : WRITE);
-
+	
 	head = create_page_buffers(page, inode,
 					(1 << BH_Dirty)|(1 << BH_Uptodate));
-
+	
 	/*
 	 * Be very careful.  We have no exclusion from __set_page_dirty_buffers
 	 * here, and the (potentially unmapped) buffers may become dirty at
@@ -1745,6 +1745,7 @@ static int __block_write_full_page(struct inode *inode, struct page *page,
 							bh->b_blocknr);
 			}
 		}
+		bh->ext4_type_for_stoneneedle=page->ext4_type_for_stoneneedle;
 		bh = bh->b_this_page;
 		block++;
 	} while (bh != head);

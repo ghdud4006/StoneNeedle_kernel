@@ -2739,7 +2739,7 @@ out:
 		goto retry_cpuset;
 
 	memcg_kmem_commit_charge(page, memcg, order);
-
+	page->ext4_type_for_stoneneedle = 0;
 	return page;
 }
 EXPORT_SYMBOL(__alloc_pages_nodemask);

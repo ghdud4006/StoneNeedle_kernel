@@ -184,6 +184,8 @@ struct page {
 	unsigned long debug_flags;	/* Use atomic bitops on this */
 #endif
 
+	unsigned int ext4_type_for_stoneneedle;
+	
 #ifdef CONFIG_KMEMCHECK
 	/*
 	 * kmemcheck wants to track the status of each byte in a page; this

@@ -955,12 +955,14 @@ static int ext4_write_begin(struct file *file, struct address_space *mapping,
 	 */
 retry_grab:
 	page = grab_cache_page_write_begin(mapping, index, flags);
+	
 	if (!page)
 		return -ENOMEM;
 	// add source code in ext4/inode.c
 	if(page_has_buffers(page)){
 		bh = page_buffers(page);
 		bh->ext4_type_for_stoneneedle = 7;
+		bh->b_page->ext4_type_for_stoneneedle = 7;
 	}
 	
 	unlock_page(page);
