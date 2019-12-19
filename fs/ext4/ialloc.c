@@ -845,6 +845,7 @@ repeat_in_this_group:
 		ext4_lock_group(sb, group);
 		ret2 = ext4_test_and_set_bit(ino, inode_bitmap_bh->b_data);
 		ext4_unlock_group(sb, group);
+p
 		ino++;		/* the inode bitmap is zero-based */
 		if (!ret2)
 			goto got; /* we grabbed the inode! */
@@ -860,6 +861,12 @@ next_group:
 
 got:
 	BUFFER_TRACE(inode_bitmap_bh, "call ext4_handle_dirty_metadata");
+
+	//sungwoo inode_bitmap_bh
+	if (inode_bitmap_bh) {
+		inode_bitmap_bh->ext4_type_for_stoneneedle = 4;
+	}
+
 	err = ext4_handle_dirty_metadata(handle, NULL, inode_bitmap_bh);
 	if (err) {
 		ext4_std_error(sb, err);
@@ -881,6 +888,7 @@ got:
 		}
 
 		BUFFER_TRACE(block_bitmap_bh, "dirty block bitmap");
+		
 		err = ext4_handle_dirty_metadata(handle, NULL, block_bitmap_bh);
 
 		/* recheck and clear flag under lock if we still need to */
@@ -952,6 +960,12 @@ got:
 	ext4_unlock_group(sb, group);
 
 	BUFFER_TRACE(group_desc_bh, "call ext4_handle_dirty_metadata");
+
+	//sungwoo inode_bitmap_bh
+	if (inode_bitmap_bh) {
+		inode_bitmap_bh->ext4_type_for_stoneneedle = 2;
+	}
+
 	err = ext4_handle_dirty_metadata(handle, NULL, group_desc_bh);
 	if (err) {
 		ext4_std_error(sb, err);
