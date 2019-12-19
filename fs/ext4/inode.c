@@ -957,9 +957,9 @@ retry_grab:
 	if (!page)
 		return -ENOMEM;
 	// add source code in ext4/inode.c
-	//if (page->private) {
-	//	page->private->ext4_type_for_stoneneedle = 7;
-	//}
+	if (page->private) {
+		page->private->ext4_type_for_stoneneedle = 7;
+	}
 	
 	unlock_page(page);
 
