@@ -1915,7 +1915,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 	block = (sector_t)page->index << (PAGE_CACHE_SHIFT - bbits);
 
 	for(bh = head, block_start = 0; bh != head || !block_start;
-	    block++, block_start=block_end, bh = bh->b_this_page) {
+	    block++, block_start=block_end, bh = bh->b_this_page) {/*put flag in here*/
 		block_end = block_start + blocksize;
 		if (block_end <= from || block_start >= to) {
 			if (PageUptodate(page)) {
