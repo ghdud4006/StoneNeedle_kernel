@@ -925,6 +925,7 @@ static int ext4_write_begin(struct file *file, struct address_space *mapping,
 	struct page *page;
 	pgoff_t index;
 	unsigned from, to;
+	struct buffer_head *bh;
 
 	trace_ext4_write_begin(inode, pos, len, flags);
 	/*
@@ -957,8 +958,9 @@ retry_grab:
 	if (!page)
 		return -ENOMEM;
 	// add source code in ext4/inode.c
-	if (page->private) {
-		page->private.ext4_type_for_stoneneedle = 7;
+	if(page_has_buffers(page)){
+		bh = page_buffers(page);
+		bh->ext4_type_for_stoneneedle = 7;
 	}
 	
 	unlock_page(page);
@@ -1057,7 +1059,8 @@ static int ext4_write_end(struct file *file,
 	struct inode *inode = mapping->host;
 	int ret = 0, ret2, ret3;
 	int i_size_changed = 0;
-	struct ext4_iloc *iloc;
+	struct ext4_iloc iloc;
+	struct buffer_head *bh;
 
 	trace_ext4_write_end(inode, pos, len, copied);
 	if (ext4_test_inode_state(inode, EXT4_STATE_ORDERED_MODE)) {
@@ -1110,12 +1113,13 @@ static int ext4_write_end(struct file *file,
 	 */
 	if (i_size_changed){
 		ext4_mark_inode_dirty(handle, inode);
-		ret3=ext4_get_inode_loc(inode, iloc);/*inode size change*/
+		ret3=ext4_get_inode_loc(inode, &iloc);/*inode size change*/
 		if(ret3)
 			printk("no inode location\n");
 		else{
 
-			iloc->bh->ext4_type_for_stoneneedle=5;
+			bh = iloc.bh;
+			bh->ext4_type_for_stoneneedle=5;
 		}
 	}
 
