@@ -958,7 +958,7 @@ retry_grab:
 		return -ENOMEM;
 	// add source code in ext4/inode.c
 	if (page->private) {
-		page->private->ext4_type_for_stoneneedle = 7;
+		page->private.ext4_type_for_stoneneedle = 7;
 	}
 	
 	unlock_page(page);
@@ -1110,9 +1110,13 @@ static int ext4_write_end(struct file *file,
 	 */
 	if (i_size_changed){
 		ext4_mark_inode_dirty(handle, inode);
-		ret3=ext4_get_inode_loc(inode,&iloc);/*inode size change*/
+		ret3=ext4_get_inode_loc(inode, iloc);/*inode size change*/
 		if(ret3)
 			printk("no inode location\n");
+		else{
+
+			iloc->bh->ext4_type_for_stoneneedle=5;
+		}
 	}
 
 	if (pos + len > inode->i_size && ext4_can_truncate(inode))
