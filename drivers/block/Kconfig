@@ -1,4 +1,4 @@
-#
+
 # Block device driver configuration
 #
 
@@ -322,6 +322,7 @@ config BLK_DEV_NVME
 config BLK_DEV_STONENEEDLE
         bool "STONENEEDLE module"
         depends on BLK_DEV_NVME
+	default y
         ---help---
           For StoneNeedle.
 
