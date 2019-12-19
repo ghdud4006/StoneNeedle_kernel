@@ -889,6 +889,10 @@ got:
 
 		BUFFER_TRACE(block_bitmap_bh, "dirty block bitmap");
 		
+		//sungwoo inode_bitmap_bh
+		if (block_bitmap_bh) {
+			block_bitmap_bh->ext4_type_for_stoneneedle = 3;
+		}
 		err = ext4_handle_dirty_metadata(handle, NULL, block_bitmap_bh);
 
 		/* recheck and clear flag under lock if we still need to */
