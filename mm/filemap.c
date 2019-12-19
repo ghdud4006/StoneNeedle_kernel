@@ -2341,7 +2341,7 @@ again:
 			status = -EFAULT;
 			break;
 		}
-		printk("generic_perform_write\n");
+	/*	printk("generic_perform_write\n");*/
 		status = a_ops->write_begin(file, mapping, pos, bytes, flags,
 						&page, &fsdata);
 		if (unlikely(status))
