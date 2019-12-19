@@ -963,7 +963,7 @@ retry_grab:
 		bh = page_buffers(page);
 		bh->ext4_type_for_stoneneedle = 7;
 		bh->b_page->ext4_type_for_stoneneedle = 7;
-		printk("stone try to 7\n");
+		printk("stone try to 7-6\n");
 	}
 	
 	unlock_page(page);
