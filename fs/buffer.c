@@ -1922,6 +1922,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 				if (!buffer_uptodate(bh))
 					set_buffer_uptodate(bh);
 			}
+			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 			continue;
 		}
 		if (buffer_new(bh))
@@ -1938,18 +1939,21 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 					clear_buffer_new(bh);
 					set_buffer_uptodate(bh);
 					mark_buffer_dirty(bh);
+					bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 					continue;
 				}
 				if (block_end > to || block_start < from)
 					zero_user_segments(page,
 						to, block_end,
 						block_start, from);
+				bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 				continue;
 			}
 		}
 		if (PageUptodate(page)) {
 			if (!buffer_uptodate(bh))
 				set_buffer_uptodate(bh);
+			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 			continue; 
 		}
 		if (!buffer_uptodate(bh) && !buffer_delay(bh) &&
