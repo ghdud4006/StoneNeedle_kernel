@@ -1909,6 +1909,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 
 	/* kwonje */
 	head->ext4_type_for_stoneneedle = 7;
+	printk("stone try to 7");
 
 	blocksize = head->b_size;
 
@@ -1926,6 +1927,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 				if (!buffer_uptodate(bh))
 					set_buffer_uptodate(bh);
 			}
+			printk("stone try to 7");
 			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 			continue;
 		}
@@ -1943,6 +1945,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 					clear_buffer_new(bh);
 					set_buffer_uptodate(bh);
 					mark_buffer_dirty(bh);
+					printk("stone try to 7");
 					bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 					continue;
 				}
@@ -1950,6 +1953,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 					zero_user_segments(page,
 						to, block_end,
 						block_start, from);
+				printk("stone try to 7");
 				bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 				continue;
 			}
@@ -1957,6 +1961,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 		if (PageUptodate(page)) {
 			if (!buffer_uptodate(bh))
 				set_buffer_uptodate(bh);
+			printk("stone try to 7");
 			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
 			continue; 
 		}

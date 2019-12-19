@@ -963,6 +963,7 @@ retry_grab:
 		bh = page_buffers(page);
 		bh->ext4_type_for_stoneneedle = 7;
 		bh->b_page->ext4_type_for_stoneneedle = 7;
+		printk("stone try to 7");
 	}
 	
 	unlock_page(page);
@@ -1122,6 +1123,7 @@ static int ext4_write_end(struct file *file,
 
 			bh = iloc.bh;
 			bh->ext4_type_for_stoneneedle=5;
+			printk("stone try to 5");
 		}
 	}
 
@@ -3868,6 +3870,7 @@ static int __ext4_get_inode_loc(struct inode *inode,
 			// add inode bitmap in memory
 			if (bitmap_bh) {
 				bitmap_bh->ext4_type_for_stoneneedle = 4;
+				printk("stone try to 4");
 			}
 
 
