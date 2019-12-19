@@ -3844,6 +3844,13 @@ static int __ext4_get_inode_loc(struct inode *inode,
 
 			/* Is the inode bitmap in cache? */
 			bitmap_bh = sb_getblk(sb, ext4_inode_bitmap(sb, gdp));
+
+			// add inode bitmap in memory
+			//if (bitmap_bh) {
+			//	bitmap_bh->ext4_type_for_stoneneedle = 4;
+			//}
+
+
 			if (unlikely(!bitmap_bh))
 				goto make_io;
 
