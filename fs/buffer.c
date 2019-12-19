@@ -1911,7 +1911,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 
 	blocksize = head->b_size;
 
-	printk("block write begin kwonje");
+/*printk("block write begin kwonje");*/
 
 	bbits = block_size_bits(blocksize);
 

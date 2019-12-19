@@ -1050,8 +1050,9 @@ static int ext4_write_end(struct file *file,
 {
 	handle_t *handle = ext4_journal_current_handle();
 	struct inode *inode = mapping->host;
-	int ret = 0, ret2;
+	int ret = 0, ret2, ret3;
 	int i_size_changed = 0;
+	struct ext4_iloc *iloc;
 
 	trace_ext4_write_end(inode, pos, len, copied);
 	if (ext4_test_inode_state(inode, EXT4_STATE_ORDERED_MODE)) {
@@ -1102,8 +1103,12 @@ static int ext4_write_end(struct file *file,
 	 * ordering of page lock and transaction start for journaling
 	 * filesystems.
 	 */
-	if (i_size_changed)
+	if (i_size_changed){
 		ext4_mark_inode_dirty(handle, inode);
+		ret3=ext4_get_inode_loc(inode,&iloc);/*inode size change*/
+		if(ret3)
+			printk("no inode location\n");
+	}
 
 	if (pos + len > inode->i_size && ext4_can_truncate(inode))
 		/* if we have allocated more blocks and copied
