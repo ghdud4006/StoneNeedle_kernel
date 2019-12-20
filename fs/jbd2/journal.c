@@ -376,7 +376,7 @@ retry_alloc:
 	new_bh = alloc_buffer_head(GFP_NOFS);
 	
 	/* hoyoung */
-	if(new_bh->ext4_type_for_stoneneedle == 0) new_bh->ext4_type_for_stoneneedle = 9;
+	//if(new_bh->ext4_type_for_stoneneedle == 0) new_bh->ext4_type_for_stoneneedle = 9;
 	
 	if (!new_bh) {
 		/*

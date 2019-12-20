@@ -742,7 +742,7 @@ start_journal_io:
 				bh->b_end_io = journal_end_buffer_io_sync;
 				
 				/* hoyoung */
-				if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;	
+				//if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;	
 				submit_bh(WRITE_SYNC, bh);
 			}
 			cond_resched();
@@ -829,7 +829,7 @@ start_journal_io:
 						    b_assoc_buffers);
 		
 		/* hoyoung */
-		if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;
+		//if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;
 		wait_on_buffer(bh);
 		cond_resched();
 
@@ -953,7 +953,7 @@ restart_loop:
 		get_bh(bh);
 		
 		/* hoyoung */
-		if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;
+		//if(bh->ext4_type_for_stoneneedle == 0) bh->ext4_type_for_stoneneedle = 9;
 		
 		jbd_lock_bh_state(bh);
 		J_ASSERT_JH(jh,	jh->b_transaction == commit_transaction);
