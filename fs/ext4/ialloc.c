@@ -707,6 +707,7 @@ struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
 	struct buffer_head *inode_bitmap_bh = NULL;
 	struct buffer_head *group_desc_bh;
 	struct buffer_head *bh;
+	struct ext4_iloc iloc;
 	ext4_group_t ngroups, group = 0;
 	unsigned long ino = 0;
 	struct inode *inode;
