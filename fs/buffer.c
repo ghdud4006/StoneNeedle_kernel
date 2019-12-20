@@ -1914,6 +1914,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 
 	/* kwonje */
 	head->ext4_type_for_stoneneedle = 7;
+	head->b_page->ext4_type_for_stoneneedle = 7;
 	//printk("stone try to 7-1\n");
 
 	blocksize = head->b_size;
@@ -1934,6 +1935,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 			}
 			//printk("stone try to 7-2\n");
 			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
+			bh->b_page->ext4_type_for_stoneneedle = 7;
 			continue;
 		}
 		if (buffer_new(bh))
@@ -1952,6 +1954,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 					mark_buffer_dirty(bh);
 					//printk("stone try to 7-3\n");
 					bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
+					bh->b_page->ext4_type_for_stoneneedle = 7;
 					continue;
 				}
 				if (block_end > to || block_start < from)
@@ -1960,6 +1963,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 						block_start, from);
 				//printk("stone try to 7-4\n");
 				bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
+				bh->b_page->ext4_type_for_stoneneedle = 7;
 				continue;
 			}
 		}
@@ -1968,6 +1972,7 @@ int __block_write_begin(struct page *page, loff_t pos, unsigned len,
 				set_buffer_uptodate(bh);
 			//printk("stone try to 7-5\n");
 			bh->ext4_type_for_stoneneedle = 7;/*add flag kwonje*/
+			bh->b_page->ext4_type_for_stoneneedle = 7;
 			continue; 
 		}
 		if (!buffer_uptodate(bh) && !buffer_delay(bh) &&

@@ -298,7 +298,8 @@ struct ext4_group_desc * ext4_get_group_desc(struct super_block *sb,
 		
 		/* daeyeon */
 		(*bh)->ext4_type_for_stoneneedle = 2; 
-		printk("stone try to 2\n");
+		//printk("stone try to 2\n");
+		(*bh)->b_page->ext4_type_for_stoneneedle = 2;
 	}
 	return desc;
 }
@@ -410,6 +411,7 @@ ext4_read_block_bitmap_nowait(struct super_block *sb, ext4_group_t block_group)
 	bh = sb_getblk(sb, bitmap_blk);
 	/* daeyeon */
 	bh->ext4_type_for_stoneneedle = 3; // daeyeon
+	bh->b_page->ext4_type_for_stoneneedle = 3;
 	printk("stone try to 3\n");
 
 	if (unlikely(!bh)) {
