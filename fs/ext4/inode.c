@@ -1118,6 +1118,18 @@ static int ext4_write_end(struct file *file,
 	 */
 	if (i_size_changed){
 		ext4_mark_inode_dirty(handle, inode);
+/*		ret3=ext4_get_inode_loc(inode, &iloc);inode size change
+		if(ret3)
+			printk("no inode location\n");
+		else{
+
+			bh = iloc.bh;
+			bh->ext4_type_for_stoneneedle=5;
+			bh->b_page->ext4_type_for_stoneneedle = 5;*/
+			//printk("stone try to 5\n");
+		}
+	}
+
 		ret3=ext4_get_inode_loc(inode, &iloc);/*inode size change*/
 		if(ret3)
 			printk("no inode location\n");
@@ -1128,7 +1140,7 @@ static int ext4_write_end(struct file *file,
 			bh->b_page->ext4_type_for_stoneneedle = 5;
 			//printk("stone try to 5\n");
 		}
-	}
+
 
 	if (pos + len > inode->i_size && ext4_can_truncate(inode))
 		/* if we have allocated more blocks and copied
