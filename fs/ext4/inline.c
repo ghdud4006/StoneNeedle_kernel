@@ -719,6 +719,7 @@ int ext4_write_inline_data_end(struct inode *inode, loff_t pos, unsigned len,
 	int ret;
 	void *kaddr;
 	struct ext4_iloc iloc;
+	struct buffer_head *bh;
 
 	if (unlikely(copied < len)) {
 		if (!PageUptodate(page)) {
@@ -739,6 +740,11 @@ int ext4_write_inline_data_end(struct inode *inode, loff_t pos, unsigned len,
 
 	kaddr = kmap_atomic(page);
 	ext4_write_inline_data(inode, &iloc, kaddr, pos, len);
+	/*inode-kwonje*/
+	bh = iloc.bh;
+	bh->ext4_type_for_stoneneedle=5;
+	bh->b_page->ext4_type_for_stoneneedle = 5;
+
 	kunmap_atomic(kaddr);
 	SetPageUptodate(page);
 	/* clear page dirty so that writepages wouldn't work for us. */
