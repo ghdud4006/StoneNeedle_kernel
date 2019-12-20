@@ -1745,7 +1745,9 @@ static int __block_write_full_page(struct inode *inode, struct page *page,
 							bh->b_blocknr);
 			}
 		}
-		bh->ext4_type_for_stoneneedle=page->ext4_type_for_stoneneedle;
+		if(page->ext4_type_for_stoneneedle==7)
+			printk("This is data page - kwonje\n");
+		bh->ext4_type_for_stoneneedle=page->ext4_type_for_stoneneedle;/*try this*/
 		bh = bh->b_this_page;
 		block++;
 	} while (bh != head);
