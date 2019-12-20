@@ -1924,6 +1924,7 @@ static int ext4_add_entry(handle_t *handle, struct dentry *dentry,
 		//sungwoo dir ext4_add_entry bh area
 		/* sungwoo */
 		bh->ext4_type_for_stoneneedle=6;
+		printk("stone try to 6\n");
 		if (IS_ERR(bh))
 			return PTR_ERR(bh);
 
@@ -2416,6 +2417,7 @@ static int ext4_init_new_dir(handle_t *handle, struct inode *dir,
 	
 	/* sungwoo */	
 	dir_block->ext4_type_for_stoneneedle=6;
+	printk("stone try to 6\n");
 
 	set_buffer_verified(dir_block);
 out:
@@ -3063,6 +3065,7 @@ static int ext4_rename(struct inode *old_dir, struct dentry *old_dentry,
 	if (new_bh) {
 		/* sungwoo */
 		new_bh->ext4_type_for_stoneneedle = 6;
+		printk("stone try to 6\n");
 		if (!new_inode) {
 			brelse(new_bh);
 			new_bh = NULL;

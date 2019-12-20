@@ -67,6 +67,7 @@ enum stoneneedle_index_item {
 	STONENEEDLE_WRITE_COUNT_PER_CHUNK,
 	STONENEEDLE_READ_COUNT_PER_CHUNK,
 	/* add other paramter here */
+	STONENEEDLE_WRITE_EXT4_TEST_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_SB_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_GDESC_PER_CHUNK,
 	STONENEEDLE_WRITE_EXT4_B_BMAP_PER_CHUNK,
@@ -110,6 +111,7 @@ const char *const stoneneedle_text[] = {
 	"READ_SEQUENTIAL_BYTES_PER_CHUNK:",
 	"WRITE_COUNT_PER_CHUNK:",
 	"READ_COUNT_PER_CHUNK:",
+	"WRITE_EXT4_TEST_PER_CHUNK:",
 	"WRITE_EXT4_SB_PER_CHUNK:",
 	"WRITE_EXT4_GDESC_PER_CHUNK:",
 	"WRITE_EXT4_B_BMAP_PER_CHUNK:",
@@ -140,6 +142,7 @@ struct stoneneedle_data {
 	unsigned long *read_seq_bytes_per_chunk;
 	unsigned long *write_count_per_chunk;
 	unsigned long *read_count_per_chunk;
+	unsigned long *write_ext4_test_per_chunk;
 	unsigned long *write_ext4_sb_per_chunk;	
 	unsigned long *write_ext4_gdesc_per_chunk;	
 	unsigned long *write_ext4_b_bmap_per_chunk;	
@@ -397,6 +400,16 @@ static int stoneneedle_write_count_chunk_show(struct seq_file *m, int offset,
 }
 
 /* Hoyoung Add */
+static int stoneneedle_write_ext4_test_chunk_show(struct seq_file *m, int offset,
+					    	    struct stoneneedle_data *io_data)
+{
+	seq_printf(m, "%s ", stoneneedle_text[offset]);
+	stoneneedle_row_show(m, io_data->write_ext4_test_per_chunk,
+			   dev_mgmt->stoneneedle_chunk_size);
+
+	return 0;
+}
+
 static int stoneneedle_write_ext4_sb_chunk_show(struct seq_file *m, int offset,
 					    	    struct stoneneedle_data *io_data)
 {
@@ -524,6 +537,7 @@ oper_func stoneneedle_show_list = {
 	stoneneedle_read_seq_bytes_chunk_show,	/*"READ_SEQUETIAL_BYTES_PER_CHUNK:", */
 	stoneneedle_write_count_chunk_show,	/*"WRITE_COUNT_PER_CHUNK:", */
 	stoneneedle_read_count_chunk_show,	/*"READ_COUNT_PER_CHUNK:", */
+	stoneneedle_write_ext4_test_chunk_show,
 	stoneneedle_write_ext4_sb_chunk_show,	/*"WRITE_EXT4_SB_PER_CHUNK:", */
 	stoneneedle_write_ext4_gdesc_chunk_show,	/*"WRITE_EXT4_GDESC_PER_CHUNK:", */
 	stoneneedle_write_ext4_b_bmap_chunk_show,	/*"WRITE_EXT4_B_BMAP_PER_CHUNK:", */
@@ -607,6 +621,8 @@ static void stoneneedle_dev_data_clear(struct stoneneedle_dev *sn_dev)
 	memset(sn_dev->dev_data.write_count_per_chunk, 0,
 	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
 	/* Hoyoung Add */
+	memset(sn_dev->dev_data.write_ext4_test_per_chunk, 0 , 
+	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
 	memset(sn_dev->dev_data.write_ext4_sb_per_chunk, 0 , 
 	       sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size);
 	memset(sn_dev->dev_data.write_ext4_gdesc_per_chunk, 0 , 
@@ -901,11 +917,16 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 			    io_data->bucket_size);
 
 	/* Hoyoung: Classify bio->fs_component_type by Ext4 component*/
+	spin_unlock(&sn_dev->dev_data.lock);
+	spin_lock(&sn_dev->dev_data.lock);
 
 	printk(KERN_INFO "stoneneedle:%u \n", bio->ext4_type_for_stoneneedle);
-	
+
+	if (bio->ext4_type_for_stoneneedle == 0) 
+		calc_bucket_account(io_data->write_ext4_test_per_chunk, bio,
+			    io_data->bucket_size);
 	/* superblock */
-	if (bio->ext4_type_for_stoneneedle == 1)
+	else if (bio->ext4_type_for_stoneneedle == 1)
 		calc_bucket_account(io_data->write_ext4_sb_per_chunk, bio,
 			    io_data->bucket_size);
 	/* group descriptor */
@@ -1128,6 +1149,7 @@ static int alloc_dev_data(struct stoneneedle_data *io_data, sector_t dev_capacit
 		    GFP_ATOMIC);
 	if (!io_data->read_count_per_chunk)
 		goto free_write_count_per_chunk;
+
 	
 	/* superblock */
 	io_data->write_ext4_sb_per_chunk =
@@ -1191,9 +1213,19 @@ static int alloc_dev_data(struct stoneneedle_data *io_data, sector_t dev_capacit
 		    GFP_ATOMIC);
 	if (!io_data->write_ext4_journal_per_chunk)
 		goto free_write_ext4_d_block_per_chunk;
+
+	/* test */
+	io_data->write_ext4_test_per_chunk =
+	    kzalloc(sizeof(unsigned long) * dev_mgmt->stoneneedle_chunk_size,
+		    GFP_ATOMIC);
+	if (!io_data->write_ext4_test_per_chunk)
+		goto free_write_ext4_journal_per_chunk;
+
 	
 	return 0;
 
+free_write_ext4_journal_per_chunk:
+	kfree(io_data->write_ext4_journal_per_chunk);
 free_write_ext4_d_block_per_chunk:
 	kfree(io_data->write_ext4_d_block_per_chunk);
 free_write_ext4_r_block_per_chunk:
@@ -1386,6 +1418,11 @@ void release_stoneneedle(const char *dev_name)
 
 	if (io_data->write_ext4_journal_per_chunk)
 		kfree(io_data->write_ext4_journal_per_chunk);
+
+	if (io_data->write_ext4_test_per_chunk)
+		kfree(io_data->write_ext4_test_per_chunk);
+
+
 
 	list_del(&sn_dev->list);
 	kfree(sn_dev);

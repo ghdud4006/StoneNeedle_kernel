@@ -126,6 +126,7 @@ ext4_read_inode_bitmap(struct super_block *sb, ext4_group_t block_group)
 	bh = sb_getblk(sb, bitmap_blk);
 	/* daeyeon */
 	bh->ext4_type_for_stoneneedle = 4;
+	printk("stone try to 4\n");
 	if (unlikely(!bh)) {
 		ext4_error(sb, "Cannot read inode bitmap - "
 			    "block_group = %u, inode_bitmap = %llu",
@@ -845,7 +846,7 @@ repeat_in_this_group:
 		ext4_lock_group(sb, group);
 		ret2 = ext4_test_and_set_bit(ino, inode_bitmap_bh->b_data);
 		ext4_unlock_group(sb, group);
-p
+
 		ino++;		/* the inode bitmap is zero-based */
 		if (!ret2)
 			goto got; /* we grabbed the inode! */
@@ -865,7 +866,9 @@ got:
 	//sungwoo inode_bitmap_bh
 	if (inode_bitmap_bh) {
 		inode_bitmap_bh->ext4_type_for_stoneneedle = 4;
+		printk("stone try to 4\n");
 	}
+
 
 	err = ext4_handle_dirty_metadata(handle, NULL, inode_bitmap_bh);
 	if (err) {
@@ -968,6 +971,7 @@ got:
 	//sungwoo inode_bitmap_bh
 	if (inode_bitmap_bh) {
 		inode_bitmap_bh->ext4_type_for_stoneneedle = 2;
+		printk("stone try to 2\n");
 	}
 
 	err = ext4_handle_dirty_metadata(handle, NULL, group_desc_bh);
