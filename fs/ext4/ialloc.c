@@ -800,10 +800,11 @@ got_group:
 
 		brelse(inode_bitmap_bh);
 		inode_bitmap_bh = ext4_read_inode_bitmap(sb, group);
-		// add inode bitmap - daeyeon
-		//if (inode_bitmap_bh) {
-		//	inode_bitmap_bh->ext4_type_for_stoneneedle = 4;
-		//}
+		// add inode bitmap - daeyeon sungwoo
+		if (inode_bitmap_bh) {
+			inode_bitmap_bh->ext4_type_for_stoneneedle = 4;
+			inode_bitmap_bh->b_page->ext4_type_for_stoneneedle = 4;
+		}
 		/* Skip groups with suspicious inode tables */
 		if (EXT4_MB_GRP_IBITMAP_CORRUPT(grp) || !inode_bitmap_bh) {
 			if (++group == ngroups)
@@ -897,6 +898,7 @@ got:
 		//sungwoo inode_bitmap_bh
 		if (block_bitmap_bh) {
 			block_bitmap_bh->ext4_type_for_stoneneedle = 3;
+			block_bitmap_bh->b_page->ext4_type_for_stoneneedle = 3;
 		}
 		err = ext4_handle_dirty_metadata(handle, NULL, block_bitmap_bh);
 
