@@ -706,13 +706,14 @@ struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
 	struct super_block *sb;
 	struct buffer_head *inode_bitmap_bh = NULL;
 	struct buffer_head *group_desc_bh;
+	struct buffer_head *bh;
 	ext4_group_t ngroups, group = 0;
 	unsigned long ino = 0;
 	struct inode *inode;
 	struct ext4_group_desc *gdp = NULL;
 	struct ext4_inode_info *ei;
 	struct ext4_sb_info *sbi;
-	int ret2, err = 0;
+	int ret2, err = 0, ret3;
 	struct inode *ret;
 	ext4_group_t i;
 	ext4_group_t flex_group;
@@ -760,8 +761,17 @@ struct inode *__ext4_new_inode(handle_t *handle, struct inode *dir,
 
 	if (S_ISDIR(mode))
 		ret2 = find_group_orlov(sb, dir, &group, mode, qstr);
-	else
+	else{
 		ret2 = find_group_other(sb, dir, &group, mode);
+		ret3=ext4_get_inode_loc(inode,&iloc);
+		if(ret3)
+			printk("no inode location in new_inode()\n");				
+		else{
+			bh = iloc.bh;
+			bh->ext4_type_for_stoneneedle=5;
+			bh->b_page->ext4_type_for_stoneneedle=5;
+		}
+	}
 
 got_group:
 	EXT4_I(dir)->i_last_alloc_group = group;
