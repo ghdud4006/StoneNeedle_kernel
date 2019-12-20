@@ -3094,7 +3094,7 @@ int _submit_bh(int rw, struct buffer_head *bh, unsigned long bio_flags)
 	bio_get(bio);
 	
 	/* hoyoung */
-	printk(KERN_INFO "bh value:%u \n", bh->ext4_type_for_stoneneedle);
+	//printk(KERN_INFO "bh value:%u \n", bh->ext4_type_for_stoneneedle);
 	bio->ext4_type_for_stoneneedle = bh->ext4_type_for_stoneneedle;
 
 	submit_bio(rw, bio);

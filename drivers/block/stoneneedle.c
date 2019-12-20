@@ -920,7 +920,7 @@ static void calc_write_stoneneedle(struct bio *bio, struct nvme_command cmnd,
 	spin_unlock(&sn_dev->dev_data.lock);
 	spin_lock(&sn_dev->dev_data.lock);
 
-	printk(KERN_INFO "stoneneedle:%u \n", bio->ext4_type_for_stoneneedle);
+	//printk(KERN_INFO "stoneneedle:%u \n", bio->ext4_type_for_stoneneedle);
 
 	if (bio->ext4_type_for_stoneneedle == 0) 
 		calc_bucket_account(io_data->write_ext4_test_per_chunk, bio,
