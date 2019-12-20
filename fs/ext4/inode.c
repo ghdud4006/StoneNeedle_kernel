@@ -1125,9 +1125,9 @@ static int ext4_write_end(struct file *file,
 
 			bh = iloc.bh;
 			bh->ext4_type_for_stoneneedle=5;
-			bh->b_page->ext4_type_for_stoneneedle = 5;*/
+			bh->b_page->ext4_type_for_stoneneedle = 5;
 			//printk("stone try to 5\n");
-		}
+		}*/
 	}
 
 		ret3=ext4_get_inode_loc(inode, &iloc);/*inode size change*/
